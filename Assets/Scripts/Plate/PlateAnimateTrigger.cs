@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class PlateAnimateTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public AudioClip slamSFX;
 
-    // Update is called once per frame
-    void Update()
+    public void PlaySlamNoise()
     {
-        
+        AudioSource.PlayClipAtPoint(slamSFX, transform.position);
     }
 
     public void ToggleAttack()
