@@ -169,10 +169,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   aggroRange: 15
-  attackRange: 4
+  attackRange: 1
   moveSpeed: 2
   damageAmount: 2
-  isAttacking: 0
 --- !u!1 &188011794
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,11 +586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42805d2043f2c548b758464591fa1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  aggroRange: 15
-  attackRange: 2
-  moveSpeed: 2
-  damageAmount: 2
 --- !u!135 &1628106420
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -662,7 +656,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628106418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.014782667, y: -0.2947417, z: -0.30664164}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.2}
   m_Children: []
   m_Father: {fileID: 21083044}
@@ -680,7 +674,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: df6570c1ccc67984797f91e20a3711d1, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 1
+  m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 

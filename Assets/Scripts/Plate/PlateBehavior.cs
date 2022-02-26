@@ -2,24 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehavior : MonoBehaviour
+public class PlateBehavior : MonoBehaviour
 {
     public GameObject target;
     public float aggroRange = 15f;
     public float attackRange = 2f;
     public float moveSpeed = 10f;
     public int damageAmount = 2;
+    bool isAttacking = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         // when within range, look at and move towards player
-        /*
         float distance = Vector3.Distance(transform.position, target.transform.position);
         if (distance < aggroRange && !isAttacking)
         {
@@ -34,27 +37,19 @@ public class EnemyBehavior : MonoBehaviour
             }
 
             // when near, slam on player's position
-            if(distance < attackRange)
+            if (distance < attackRange)
             {
                 // attack
                 // play animation, call DealDamage();
                 isAttacking = true;
-                GetComponent<Animator>().SetTrigger("isAttacking");
+                GetComponentInChildren<Animator>().SetTrigger("isAttacking");
             }
         }
-        */
     }
 
     public void ToggleAttack()
     {
-        FindObjectOfType<EnemyParentBehavior>().ToggleAttack();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            Debug.Log("Hit player");
-        }
+        isAttacking = false;
+        transform.position += transform.forward * 1.6f;
     }
 }
