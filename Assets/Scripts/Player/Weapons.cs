@@ -44,13 +44,13 @@ public class Weapons : MonoBehaviour
         if (Input.GetButtonDown("Fire1")) {
             switch (activeWeapon) {
                 case "broom":
-                    Debug.Log("brrom");
+                    Debug.Log("broom attack");
                     break;
                 case "sponge":
-                    Debug.Log("spong");
+                    Debug.Log("sponge attack");
                     break;
                 default:
-                    Debug.Log("AHHHHHHHHH");
+                    Debug.Log("no weapon equipped");
                     break;
             }
         }

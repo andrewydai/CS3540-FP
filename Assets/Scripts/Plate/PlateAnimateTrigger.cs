@@ -29,7 +29,6 @@ public class PlateAnimateTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && parent.isAttacking) {
-            Debug.Log("ouchie");
             var playerHealth = other.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage(damageAmount);
         }

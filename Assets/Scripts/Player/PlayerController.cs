@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Animate();
+        Animate();
         Move();
     }
 
@@ -63,12 +63,10 @@ public class PlayerController : MonoBehaviour
         bool moveJump = Input.GetButton("Jump");
 
         if (moveJump) {
-            _animator.Play("Standing_Jump", 3, 0.0f);
+            _animator.Play("Standing_Jump", 3);
         } else if ((moveHorizontal != 0) || (moveVertical != 0)) {
             _animator.Play("Walk", 0);
         }
-        //_animator.Play("Idle", 0, 0.0f);
-
 
     }
 }
