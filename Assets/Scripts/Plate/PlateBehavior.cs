@@ -8,9 +8,9 @@ public class PlateBehavior : MonoBehaviour
     public float aggroRange = 15f;
     public float attackRange = 2f;
     public float moveSpeed = 10f;
-    public int damageAmount = 2;
+    public int damageAmount = 5;
     public float turnSpeed = 2;
-    bool isAttacking = false;
+    public bool isAttacking = false;
     // Start is called before the first frame update
     void Start()
     {

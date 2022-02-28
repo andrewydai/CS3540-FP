@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlateAnimateTrigger : MonoBehaviour
 {
     public AudioClip slamSFX;
-    public int damageAmount = 10;
     PlateBehavior parent;
 
     // Start is called before the first frame update
@@ -29,7 +28,7 @@ public class PlateAnimateTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && parent.isAttacking) {
             var playerHealth = other.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(damageAmount);
+            playerHealth.TakeDamage(parent.damageAmount);
         }
         /*
         if (other.CompareTag("Enemy"))
