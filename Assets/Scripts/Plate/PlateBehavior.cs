@@ -61,4 +61,5 @@ public class PlateBehavior : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
         GetComponentInChildren<BoxCollider>().isTrigger = false;
     }
+
 }
