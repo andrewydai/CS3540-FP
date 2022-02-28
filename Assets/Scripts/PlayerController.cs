@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 10f;
-    public float gravity = 9.81f;
+    public float gravity = 20f;
     public float jumpHeight = 5f;
 
     Vector3 input;
@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
             }
         } else {
             //midair
+            input.y = moveDirection.y;
+            moveDirection = Vector3.Lerp(moveDirection, input, moveSpeed * Time.deltaTime);
         }
 
         moveDirection.y -= gravity * Time.deltaTime;

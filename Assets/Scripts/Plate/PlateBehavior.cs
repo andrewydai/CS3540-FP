@@ -9,6 +9,7 @@ public class PlateBehavior : MonoBehaviour
     public float attackRange = 2f;
     public float moveSpeed = 10f;
     public int damageAmount = 2;
+    public float turnSpeed = 2;
     bool isAttacking = false;
     // Start is called before the first frame update
     void Start()
@@ -27,13 +28,17 @@ public class PlateBehavior : MonoBehaviour
         if (distance < aggroRange && !isAttacking)
         {
             // look at
-            transform.LookAt(target.transform);
+            Vector3 lookPos = target.transform.position - transform.position;
+            lookPos.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
 
             // move towards player
             bool shouldWalk = Mathf.Sin(Time.time) > -0.5;
             if (shouldWalk)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime * moveSpeed);
+                Vector3 targetWithoutY = Vector3.Scale(Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime * moveSpeed), new Vector3(1, 0, 1));
+                transform.position = targetWithoutY + new Vector3(0, transform.position.y, 0);
             }
 
             // when near, slam on player's position
@@ -42,7 +47,9 @@ public class PlateBehavior : MonoBehaviour
                 // attack
                 // play animation, call DealDamage();
                 isAttacking = true;
+                GetComponent<Rigidbody>().isKinematic = true;
                 GetComponentInChildren<Animator>().SetTrigger("isAttacking");
+                GetComponentInChildren<BoxCollider>().isTrigger = true;
             }
         }
     }
@@ -51,5 +58,7 @@ public class PlateBehavior : MonoBehaviour
     {
         isAttacking = false;
         transform.position += transform.forward * 1.6f;
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponentInChildren<BoxCollider>().isTrigger = false;
     }
 }
