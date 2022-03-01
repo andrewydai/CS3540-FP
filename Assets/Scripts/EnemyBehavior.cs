@@ -30,16 +30,12 @@ public class EnemyBehavior : MonoBehaviour
         {
             currentHealth = 0;
             AudioSource.PlayClipAtPoint(deathSFX, transform.position);
+            enemyCount--;
+            if (enemyCount == 0)
+            {
+                FindObjectOfType<LevelManager>().WinLevel();
+            }
             Destroy(gameObject);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        enemyCount--;
-        if (enemyCount == 0)
-        {
-            FindObjectOfType<LevelManager>().WinLevel();
         }
     }
 }

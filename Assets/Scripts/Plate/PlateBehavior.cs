@@ -25,7 +25,7 @@ public class PlateBehavior : MonoBehaviour
     {
         // when within range, look at and move towards player
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance < aggroRange && !isAttacking && !FindObjectOfType<LevelManager>().isLevelOver)
+        if (distance < aggroRange && !isAttacking && !LevelManager.isLevelOver)
         {
             // look at
             Vector3 lookPos = target.transform.position - transform.position;

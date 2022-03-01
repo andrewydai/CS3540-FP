@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!FindObjectOfType<LevelManager>().isLevelOver)
+        if (!LevelManager.isLevelOver)
         {
             Animate();
             Move();

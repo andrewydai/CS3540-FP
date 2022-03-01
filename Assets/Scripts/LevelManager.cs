@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public bool isLevelOver;
+    public static bool isLevelOver;
     public AudioClip winSFX;
     public AudioClip loseSFX;
     public Text statusText;
@@ -20,9 +20,9 @@ public class LevelManager : MonoBehaviour
 
     private void EndLevel(string msg, AudioClip endSFX)
     {
-        isLevelOver = true;
-        statusText.text = msg;
         AudioSource.PlayClipAtPoint(endSFX, Camera.main.transform.position);
+        statusText.text = msg;
+        isLevelOver = true;
     }
 
     public void WinLevel()
@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
     public void LoseLevel()
     {
         EndLevel("You Lost!", loseSFX);
-        Invoke("ReloadLevel", 3);
+        Invoke("ReloadLevel", 4);
     }
 
     private void ReloadLevel()

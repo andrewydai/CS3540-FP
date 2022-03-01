@@ -44,7 +44,7 @@ public class Weapons : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetButtonDown("Fire1") && !FindObjectOfType<LevelManager>().isLevelOver) {
+        if (Input.GetButtonDown("Fire1") && !LevelManager.isLevelOver) {
             switch (activeWeapon) {
                 case "broom":
                     broom.GetComponent<BroomAttack>().Attack();
