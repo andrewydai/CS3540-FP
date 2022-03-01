@@ -15,8 +15,10 @@ public class PlateAnimateTrigger : MonoBehaviour
 
     public void PlaySlamNoise()
     {
-        
-        AudioSource.PlayClipAtPoint(slamSFX, transform.position);
+        if(!LevelManager.isLevelOver)
+        {
+            AudioSource.PlayClipAtPoint(slamSFX, transform.position);
+        }
     }
 
     public void ToggleAttack()

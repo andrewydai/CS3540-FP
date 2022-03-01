@@ -12,10 +12,11 @@ public class LevelManager : MonoBehaviour
     public Text statusText;
     public Text objectiveText;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GetComponent<AudioSource>().Play();
         isLevelOver = false;
+        EnemyBehavior.enemyCount = 0;
     }
 
     private void EndLevel(string msg, AudioClip endSFX)

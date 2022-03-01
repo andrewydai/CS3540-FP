@@ -25,13 +25,18 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        if (currentHealth > 0 && !LevelManager.isLevelOver) {
-            currentHealth -= damageAmount;
-            healthSlider.value = currentHealth;
-        }
-        
-        if (currentHealth <= 0) {
-            PlayerDies();
+        if(!LevelManager.isLevelOver)
+        {
+            if (currentHealth > 0)
+            {
+                currentHealth -= damageAmount;
+                healthSlider.value = currentHealth;
+            }
+
+            if (currentHealth <= 0)
+            {
+                PlayerDies();
+            }
         }
     }
 

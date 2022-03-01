@@ -22,20 +22,23 @@ public class EnemyBehavior : MonoBehaviour
     }
     public void TakeDamage(int damageAmount)
     {
-        if (currentHealth >= damageAmount)
+        if(currentHealth != 0)
         {
-            currentHealth -= damageAmount;
-        }
-        else
-        {
-            currentHealth = 0;
-            AudioSource.PlayClipAtPoint(deathSFX, transform.position);
-            enemyCount--;
-            if (enemyCount == 0)
+            if (currentHealth > damageAmount)
             {
-                FindObjectOfType<LevelManager>().WinLevel();
+                currentHealth -= damageAmount;
             }
-            Destroy(gameObject);
+            else
+            {
+                currentHealth = 0;
+                enemyCount--;
+                AudioSource.PlayClipAtPoint(deathSFX, transform.position);
+                if (enemyCount == 0)
+                {
+                    FindObjectOfType<LevelManager>().WinLevel();
+                }
+                Destroy(gameObject);
+            }
         }
     }
 }
