@@ -14,8 +14,8 @@ public class Weapons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        activeWeapon = "broom";
-        sponge.SetActive(false);
+        activeWeapon = "sponge";
+        broom.SetActive(false);
 
     }
 

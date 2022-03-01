@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   projectile: {fileID: 203737938855273520, guid: 5d41f380c202104449d1c7707ec8e0db, type: 3}
+  attackSFX: {fileID: 8300000, guid: 9775c809e1d7cc84193eb16aee27017d, type: 3}
 --- !u!1 &5792918901947438567
 GameObject:
   m_ObjectHideFlags: 0
