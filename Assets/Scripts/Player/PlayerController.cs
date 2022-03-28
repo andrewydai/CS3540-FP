@@ -4,72 +4,121 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float gravity = 20f;
+    public float gravity = 9.81f;
     public float jumpHeight = 5f;
-    public float airControl = 5f;
-
-    Vector3 input;
-    Vector3 moveDirection;
+    public float moveSpeed = 10f;
+    Vector3 input, moveDirection;
     CharacterController _controller;
-    Animator _animator;
+    public float airControl = 10f;
+    Animator anim;
 
-    // Start is called before the first frame update
+    int idle;
+    int walkForward;
+    int walkBackward;
+    int jump;
+    int attack;
+    int strafeLeft;
+    int strafeRight;
+    int roll;
+
     void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        _animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        InitAnimStates();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!LevelManager.isLevelOver)
+        NormalMoving();
+    }
+
+    void InitAnimStates()
+    {
+        idle = 0;
+        walkForward = 1;
+        walkBackward = 2;
+        strafeLeft = 3;
+        strafeRight = 4;
+        jump = 5;
+        attack = 6;
+        roll = 7;
+    }
+
+    void Roll()
+    {
+        // if the player is pressing roll
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            Animate();
-            Move();
+            anim.SetInteger("State", roll);
         }
     }
 
-    void Move()
+    void NormalMoving()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        input = transform.right * moveHorizontal + transform.forward * moveVertical;
+        input = (transform.right * moveHorizontal + transform.forward * moveVertical).normalized;
         input *= moveSpeed;
-
-        if (_controller.isGrounded) {
-            //jump
+        
+        // if we are on the ground
+        if (_controller.isGrounded)
+        {
+            if (!Input.anyKey || anim.GetInteger("State") == jump ||  anim.GetInteger("State") == roll)
+            { // idling
+                anim.SetInteger("State", idle);
+            }
             moveDirection = input;
-            if (Input.GetButton("Jump")) {
-                //jump
+            // if the player is pressing jump
+            if (Input.GetButton("Jump"))
+            {
                 moveDirection.y = Mathf.Sqrt(2 * gravity * jumpHeight);
-            } else {
-                //ground
+                anim.SetInteger("State", jump);
+            }
+            else
+            {
                 moveDirection.y = 0.0f;
             }
-        } else {
-            //midair
-            input.y = moveDirection.y;
-            moveDirection = Vector3.Lerp(moveDirection, input, Time.deltaTime * airControl);
         }
-
+        else 
+        {   
+            input.y = moveDirection.y;
+            moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
+        }
+        // set walking animations
+        if (anim.GetInteger("State") != jump && anim.GetInteger("State") != roll) {
+            if (moveVertical > 0 && moveHorizontal < 0.5 && moveHorizontal > -0.5) 
+            { // walking forwards
+                anim.SetInteger("State", walkForward);
+                // handle rolling
+                Roll();
+            }
+            else if (moveVertical < 0 && moveHorizontal < 0.5 && moveHorizontal > -0.5) 
+            { // walking backwards
+                anim.SetInteger("State", walkBackward);
+            }
+            else if (moveHorizontal < 0)
+            { // strafing left
+                anim.SetInteger("State", strafeLeft);
+                // handle rolling
+                Roll();
+            }
+            else if (moveHorizontal > 0)
+            { // strafing right
+                anim.SetInteger("State", strafeRight);
+                // handle rolling
+                Roll();
+            }
+        }
+        Debug.Log($"horizontal: {moveHorizontal}, vertical: {moveVertical}, grounded: {_controller.isGrounded}, dir: {moveDirection}");
         moveDirection.y -= gravity * Time.deltaTime;
         _controller.Move(moveDirection * Time.deltaTime);
-    }
-
-    void Animate()
-    {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        bool moveJump = Input.GetButton("Jump");
-
-        if (moveJump) {
-            _animator.Play("Standing_Jump", 3);
-        } else if ((moveHorizontal != 0) || (moveVertical != 0)) {
-            _animator.Play("Walk", 0);
-        }
-
     }
 }
