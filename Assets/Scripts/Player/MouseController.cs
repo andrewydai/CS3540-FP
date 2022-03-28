@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseController : MonoBehaviour
 {
-    public float mouseSensitivity = 10f;
+    public float mouseSensitivity = 50f;
     public float pitchMin = -60f;
     public float pitchMax = 25f;
     float pitch = 0f;

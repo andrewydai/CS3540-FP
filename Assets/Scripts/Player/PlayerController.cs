@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
     public float airControl = 10f;
     Animator anim;
 
-    int idle1;
-    int idle2;
+    int idle;
     int walkForward;
     int walkBackward;
     int jump;
     int attack;
+    int strafeLeft;
+    int strafeRight;
+    float timeElapsed;
 
     void Awake()
     {
@@ -39,12 +41,13 @@ public class PlayerController : MonoBehaviour
 
     void InitAnimStates()
     {
-        idle1 = 0;
-        idle2 = 1;
-        walkForward = 2;
-        walkBackward = 3;
-        jump = 4;
-        attack = 5;
+        idle = 0;
+        walkForward = 1;
+        walkBackward = 2;
+        strafeLeft = 3;
+        strafeRight = 4;
+        jump = 5;
+        attack = 6;
     }
 
     void NormalMoving()
@@ -58,7 +61,10 @@ public class PlayerController : MonoBehaviour
         // if we are on the ground
         if (_controller.isGrounded)
         {
-            anim.SetInteger("State", Random.Range(0, 2));
+            if (!Input.anyKey || anim.GetInteger("State") == jump)
+            { // idling
+                anim.SetInteger("State", idle);
+            }
             moveDirection = input;
             // if the player is pressing jump
             if (Input.GetButton("Jump"))
@@ -76,12 +82,26 @@ public class PlayerController : MonoBehaviour
             input.y = moveDirection.y;
             moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
         }
-        // set walking and idle animations
+        // set walking animations
         if (anim.GetInteger("State") != jump) {
-            if (input.x != 0 || input.z != 0) {
+            if (moveVertical > 0 && moveHorizontal < 0.5 && moveHorizontal > -0.5) 
+            { // walking forwards
                 anim.SetInteger("State", walkForward);
             }
+            else if (moveVertical < 0 && moveHorizontal < 0.5 && moveHorizontal > -0.5) 
+            { // walking backwards
+                anim.SetInteger("State", walkBackward);
+            }
+            else if (moveHorizontal < 0)
+            { // strafing left
+                anim.SetInteger("State", strafeLeft);
+            }
+            else if (moveHorizontal > 0)
+            { // strafing right
+                anim.SetInteger("State", strafeRight);
+            }
         }
+        Debug.Log($"horizontal: {moveHorizontal}, vertical: {moveVertical}, grounded: {_controller.isGrounded}");
         moveDirection.y -= gravity * Time.deltaTime;
         _controller.Move(moveDirection * Time.deltaTime);
     }
