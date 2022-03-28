@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class MouseController : MonoBehaviour
 {
-    public float mouseSensitivity = 100f;
-    float pitch = 0;
-    float yaw = 0;
-    public Transform playerHead;
-    public Transform playerBody;
-
+    public float mouseSensitivity = 10f;
+    public float pitchMin = -60f;
+    public float pitchMax = 25f;
+    float pitch = 0f;
+    Transform playerBody;
     void Awake()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        playerBody = transform.parent.transform;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        pitch = 0f;
     }
 
     // Update is called once per frame
@@ -22,24 +29,11 @@ public class MouseController : MonoBehaviour
         float moveX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float moveY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        //yaw
-        yaw += moveX;
-        yaw = Mathf.Clamp(yaw, -30, 30);
+        // yaw
         playerBody.Rotate(Vector3.up * moveX);
 
-        //pitch
-        pitch -= moveY;
-        pitch = Mathf.Clamp(pitch, -20, 20);
-
-        //apply pitch and yaw
-        playerHead.localRotation = Quaternion.Euler(-yaw, pitch, 0);
-
-        /*
-        Quaternion pHeadRotation = playerHead.rotation;
-        Quaternion hybridRotation = playerBody.rotation;
-        hybridRotation.y = playerHead.rotation.y;
-        playerBody.localRotation = Quaternion.RotateTowards(playerBody.rotation, playerHead.rotation, Time.deltaTime * 2);
-        playerHead.rotation = pHeadRotation;
-        */
+        // pitch
+        pitch = Mathf.Clamp(pitch - moveY, pitchMin, pitchMax);
+        transform.localRotation = Quaternion.Euler(pitch, 0, 0);
     }
 }

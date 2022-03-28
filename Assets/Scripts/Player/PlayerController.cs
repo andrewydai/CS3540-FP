@@ -4,72 +4,85 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float gravity = 20f;
+    public float gravity = 9.81f;
     public float jumpHeight = 5f;
-    public float airControl = 5f;
-
-    Vector3 input;
-    Vector3 moveDirection;
+    public float moveSpeed = 10f;
+    Vector3 input, moveDirection;
     CharacterController _controller;
-    Animator _animator;
+    public float airControl = 10f;
+    Animator anim;
 
-    // Start is called before the first frame update
+    int idle1;
+    int idle2;
+    int walkForward;
+    int walkBackward;
+    int jump;
+    int attack;
+
     void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        _animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        InitAnimStates();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!LevelManager.isLevelOver)
-        {
-            Animate();
-            Move();
-        }
+        NormalMoving();
     }
 
-    void Move()
+    void InitAnimStates()
+    {
+        idle1 = 0;
+        idle2 = 1;
+        walkForward = 2;
+        walkBackward = 3;
+        jump = 4;
+        attack = 5;
+    }
+
+    void NormalMoving()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        input = transform.right * moveHorizontal + transform.forward * moveVertical;
+        input = (transform.right * moveHorizontal + transform.forward * moveVertical).normalized;
         input *= moveSpeed;
-
-        if (_controller.isGrounded) {
-            //jump
+        
+        // if we are on the ground
+        if (_controller.isGrounded)
+        {
+            anim.SetInteger("State", Random.Range(0, 2));
             moveDirection = input;
-            if (Input.GetButton("Jump")) {
-                //jump
+            // if the player is pressing jump
+            if (Input.GetButton("Jump"))
+            {
                 moveDirection.y = Mathf.Sqrt(2 * gravity * jumpHeight);
-            } else {
-                //ground
+                anim.SetInteger("State", jump);
+            }
+            else
+            {
                 moveDirection.y = 0.0f;
             }
-        } else {
-            //midair
-            input.y = moveDirection.y;
-            moveDirection = Vector3.Lerp(moveDirection, input, Time.deltaTime * airControl);
         }
-
+        else 
+        {   
+            input.y = moveDirection.y;
+            moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
+        }
+        // set walking and idle animations
+        if (anim.GetInteger("State") != jump) {
+            if (input.x != 0 || input.z != 0) {
+                anim.SetInteger("State", walkForward);
+            }
+        }
         moveDirection.y -= gravity * Time.deltaTime;
         _controller.Move(moveDirection * Time.deltaTime);
-    }
-
-    void Animate()
-    {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        bool moveJump = Input.GetButton("Jump");
-
-        if (moveJump) {
-            _animator.Play("Standing_Jump", 3);
-        } else if ((moveHorizontal != 0) || (moveVertical != 0)) {
-            _animator.Play("Walk", 0);
-        }
-
     }
 }
