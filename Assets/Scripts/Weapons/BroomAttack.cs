@@ -5,30 +5,35 @@ using UnityEngine;
 public class BroomAttack : MonoBehaviour
 {
     public int damage = 10;
-    // Start is called before the first frame update
+    public AudioClip broomHit;
+    bool isAttacking;
+    Transform player;
+
     void Start()
     {
-        
+        isAttacking = false;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetAttacking()
     {
-        
+        isAttacking = true;
+        Invoke("UnsetAttacking", 0.75f);
     }
 
-    public void Attack()
+    void UnsetAttacking()
     {
-        GetComponent<Animator>().SetTrigger("Attack");
+        isAttacking = false;
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         GameObject gobj = other.gameObject;
-        if(gobj.CompareTag("Enemy"))
+        if(gobj.CompareTag("Enemy") && isAttacking)
         {
             gobj.GetComponent<EnemyBehavior>().TakeDamage(damage);
+            gobj.GetComponent<EnemyBounceBehavior>().BounceEnemy(player.position);
+            AudioSource.PlayClipAtPoint(broomHit, player.position);
         }
     }
 }

@@ -48,16 +48,16 @@ public class PlayerController : MonoBehaviour
         strafeRight = 4;
         jump = 5;
         attack = 6;
-        roll = 7;
     }
 
-    void Roll()
+    public void Attack()
     {
-        // if the player is pressing roll
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            anim.SetInteger("State", roll);
-        }
+        anim.SetInteger("State", attack);
+    }
+
+    void Idle()
+    {
+        anim.SetInteger("State", idle);
     }
 
     void NormalMoving()
@@ -71,9 +71,9 @@ public class PlayerController : MonoBehaviour
         // if we are on the ground
         if (_controller.isGrounded)
         {
-            if (!Input.anyKey || anim.GetInteger("State") == jump ||  anim.GetInteger("State") == roll)
+            if (!Input.anyKey || anim.GetInteger("State") == jump)
             { // idling
-                anim.SetInteger("State", idle);
+                Idle();
             }
             moveDirection = input;
             // if the player is pressing jump
@@ -93,12 +93,10 @@ public class PlayerController : MonoBehaviour
             moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
         }
         // set walking animations
-        if (anim.GetInteger("State") != jump && anim.GetInteger("State") != roll) {
+        if (anim.GetInteger("State") != jump && anim.GetInteger("State") != attack) {
             if (moveVertical > 0 && moveHorizontal < 0.5 && moveHorizontal > -0.5) 
             { // walking forwards
                 anim.SetInteger("State", walkForward);
-                // handle rolling
-                Roll();
             }
             else if (moveVertical < 0 && moveHorizontal < 0.5 && moveHorizontal > -0.5) 
             { // walking backwards
@@ -107,17 +105,12 @@ public class PlayerController : MonoBehaviour
             else if (moveHorizontal < 0)
             { // strafing left
                 anim.SetInteger("State", strafeLeft);
-                // handle rolling
-                Roll();
             }
             else if (moveHorizontal > 0)
             { // strafing right
                 anim.SetInteger("State", strafeRight);
-                // handle rolling
-                Roll();
             }
         }
-        Debug.Log($"horizontal: {moveHorizontal}, vertical: {moveVertical}, grounded: {_controller.isGrounded}, dir: {moveDirection}");
         moveDirection.y -= gravity * Time.deltaTime;
         _controller.Move(moveDirection * Time.deltaTime);
     }
