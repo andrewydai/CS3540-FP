@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehavior : MonoBehaviour
 {
     public int health = 25;
     public AudioClip deathSFX;
+    public Slider healthSlider;
     public static int enemyCount = 0;
     int currentHealth;
     // Start is called before the first frame update
@@ -13,6 +15,8 @@ public class EnemyBehavior : MonoBehaviour
     {
         enemyCount++;
         currentHealth = health;
+        healthSlider.maxValue = health;
+        healthSlider.value = currentHealth;
     }
 
     // Update is called once per frame
@@ -40,5 +44,7 @@ public class EnemyBehavior : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        healthSlider.value = currentHealth;
     }
 }
