@@ -7,7 +7,8 @@ public class Weapons : MonoBehaviour
 {
     public GameObject broom;
     public GameObject sponge;
-    public Text weaponText;
+    public Image broomIcon;
+    public Image spongeIcon;
 
     string activeWeapon;
 
@@ -16,7 +17,7 @@ public class Weapons : MonoBehaviour
     {
         activeWeapon = "sponge";
         broom.SetActive(false);
-
+        broomIcon.color = Color.gray;
     }
 
     // Update is called once per frame
@@ -24,7 +25,6 @@ public class Weapons : MonoBehaviour
     {
         WeaponChange();
         Attack();
-        weaponText.text = "Weapon: " + activeWeapon; 
     }
 
     void WeaponChange()
@@ -32,13 +32,17 @@ public class Weapons : MonoBehaviour
         if (Input.GetKeyDown("1")) {
             activeWeapon = "broom";
             broom.SetActive(true);
+            broomIcon.color = Color.white;
             sponge.SetActive(false);
+            spongeIcon.color = Color.gray;
         }
 
         if (Input.GetKeyDown("2")) {
             activeWeapon = "sponge";
             broom.SetActive(false);
+            broomIcon.color = Color.gray;
             sponge.SetActive(true);
+            spongeIcon.color = Color.white;
         }
     }
 
