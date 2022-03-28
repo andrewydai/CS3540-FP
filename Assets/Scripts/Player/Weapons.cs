@@ -9,6 +9,7 @@ public class Weapons : MonoBehaviour
     public GameObject sponge;
     public Text weaponText;
 
+    PlayerController player;
     string activeWeapon;
 
     // Start is called before the first frame update
@@ -16,7 +17,7 @@ public class Weapons : MonoBehaviour
     {
         activeWeapon = "sponge";
         broom.SetActive(false);
-
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -47,10 +48,12 @@ public class Weapons : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !LevelManager.isLevelOver) {
             switch (activeWeapon) {
                 case "broom":
-                    broom.GetComponent<BroomAttack>().Attack();
+                    broom.GetComponentInChildren<BroomAttack>().SetAttacking();
+                    player.Attack();
                     break;
                 case "sponge":
                     sponge.GetComponent<SpongeAttack>().Attack();
+                    player.Attack();
                     break;
                 default:
                     Debug.Log("no weapon equipped");

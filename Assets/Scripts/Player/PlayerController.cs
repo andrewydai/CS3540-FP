@@ -60,6 +60,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Attack()
+    {
+        anim.SetInteger("State", attack);
+    }
+
+    void Idle()
+    {
+        anim.SetInteger("State", idle);
+    }
+
     void NormalMoving()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -73,7 +83,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!Input.anyKey || anim.GetInteger("State") == jump ||  anim.GetInteger("State") == roll)
             { // idling
-                anim.SetInteger("State", idle);
+                Idle();
             }
             moveDirection = input;
             // if the player is pressing jump
@@ -93,7 +103,7 @@ public class PlayerController : MonoBehaviour
             moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
         }
         // set walking animations
-        if (anim.GetInteger("State") != jump && anim.GetInteger("State") != roll) {
+        if (anim.GetInteger("State") != jump && anim.GetInteger("State") != roll && anim.GetInteger("State") != attack) {
             if (moveVertical > 0 && moveHorizontal < 0.5 && moveHorizontal > -0.5) 
             { // walking forwards
                 anim.SetInteger("State", walkForward);
