@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapons : MonoBehaviour
 {
     public GameObject broom;
     public GameObject sponge;
+    public Text weaponText;
 
     string activeWeapon;
 
     // Start is called before the first frame update
     void Start()
     {
-        activeWeapon = "broom";
-        sponge.SetActive(false);
+        activeWeapon = "sponge";
+        broom.SetActive(false);
 
     }
 
@@ -22,6 +24,7 @@ public class Weapons : MonoBehaviour
     {
         WeaponChange();
         Attack();
+        weaponText.text = "Weapon: " + activeWeapon; 
     }
 
     void WeaponChange()
@@ -41,13 +44,13 @@ public class Weapons : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1") && !LevelManager.isLevelOver) {
             switch (activeWeapon) {
                 case "broom":
-                    Debug.Log("broom attack");
+                    broom.GetComponent<BroomAttack>().Attack();
                     break;
                 case "sponge":
-                    Debug.Log("sponge attack");
+                    sponge.GetComponent<SpongeAttack>().Attack();
                     break;
                 default:
                     Debug.Log("no weapon equipped");

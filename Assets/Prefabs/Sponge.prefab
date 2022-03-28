@@ -104,6 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5255069233450217970}
+  - component: {fileID: -9131539004411409991}
   m_Layer: 0
   m_Name: Sponge
   m_TagString: Untagged
@@ -127,6 +128,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-9131539004411409991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633683719910431843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6909d716ee6523944b076975bb5fe660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  projectile: {fileID: 203737938855273520, guid: 5d41f380c202104449d1c7707ec8e0db, type: 3}
+  attackSFX: {fileID: 8300000, guid: 9775c809e1d7cc84193eb16aee27017d, type: 3}
 --- !u!1 &5792918901947438567
 GameObject:
   m_ObjectHideFlags: 0

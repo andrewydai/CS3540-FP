@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 10f;
-    public float gravity = 9.81f;
+    public float gravity = 20f;
     public float jumpHeight = 5f;
     public float airControl = 5f;
 
@@ -24,8 +24,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Animate();
-        Move();
+        if (!LevelManager.isLevelOver)
+        {
+            Animate();
+            Move();
+        }
     }
 
     void Move()

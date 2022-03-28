@@ -19,8 +19,8 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float moveX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float moveY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float moveX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float moveY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         //yaw
         yaw += moveX;
