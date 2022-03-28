@@ -17,6 +17,6 @@ public class SpongeAttack : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(attackSFX, transform.position);
         Transform cameraTransform = Camera.main.transform;
-        Instantiate(projectile, cameraTransform.position + cameraTransform.forward * 2, cameraTransform.rotation);
+        Instantiate(projectile, cameraTransform.position + cameraTransform.forward * 4, cameraTransform.rotation);
     }
 }

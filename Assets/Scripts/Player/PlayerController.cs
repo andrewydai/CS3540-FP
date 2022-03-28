@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
                 Roll();
             }
         }
-        Debug.Log($"horizontal: {moveHorizontal}, vertical: {moveVertical}, grounded: {_controller.isGrounded}, dir: {moveDirection}");
+        // Debug.Log($"horizontal: {moveHorizontal}, vertical: {moveVertical}, grounded: {_controller.isGrounded}, dir: {moveDirection}");
         moveDirection.y -= gravity * Time.deltaTime;
         _controller.Move(moveDirection * Time.deltaTime);
     }
