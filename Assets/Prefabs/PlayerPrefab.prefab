@@ -2278,6 +2278,7 @@ GameObject:
   - component: {fileID: 9051303801679180175}
   - component: {fileID: 7553790174834817883}
   - component: {fileID: 642382458}
+  - component: {fileID: 155575223}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -2397,7 +2398,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broom: {fileID: 5166687601510994744}
   sponge: {fileID: 6183829763391159014}
-  weaponText: {fileID: 0}
+  broomIcon: {fileID: 0}
+  spongeIcon: {fileID: 0}
+--- !u!136 &155575223
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051303801679180210}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8168923943098869381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2558,14 +2574,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3958131858181366060, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
   m_PrefabInstance: {fileID: 8168923944220684821}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5166687602111368787 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3958131857580080198, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
-  m_PrefabInstance: {fileID: 8168923944220684821}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5166687600176994673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3958131858994359140, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
+  m_PrefabInstance: {fileID: 8168923944220684821}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5166687602111368787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3958131857580080198, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
   m_PrefabInstance: {fileID: 8168923944220684821}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &70413106
