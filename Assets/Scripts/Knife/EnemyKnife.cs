@@ -16,7 +16,7 @@ public class EnemyKnife : MonoBehaviour
     public GameObject player;
     public float lookSpeed;
     public float attackForce;
-    public float damage;
+    public int damage;
     public float cooldownTime;
     public AudioClip hitSFX;
     public AudioClip attackSFX;
@@ -75,7 +75,6 @@ public class EnemyKnife : MonoBehaviour
             childAnimator.SetInteger("AnimState", 2);
             return;
         }
-
         if (Vector3.Distance(transform.position, player.transform.position) < attackRange && IsFacingPlayer())
         {
             rb.detectCollisions = true;
@@ -134,6 +133,7 @@ public class EnemyKnife : MonoBehaviour
         if(go.tag == "Player")
         {
             AudioSource.PlayClipAtPoint(hitSFX, player.transform.position);
+            go.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
     }
 
