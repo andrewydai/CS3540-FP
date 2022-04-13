@@ -274,6 +274,7 @@ MonoBehaviour:
   health: 25
   deathSFX: {fileID: 8300000, guid: 7a18b23d428e9024d9fe7614c994128b, type: 3}
   healthSlider: {fileID: 8949436966239343437}
+  heartPrefab: {fileID: 7741614382274929807, guid: b3ab4430a552e234e9f892bd01399ccf, type: 3}
 --- !u!1 &5770108899361882739
 GameObject:
   m_ObjectHideFlags: 0
