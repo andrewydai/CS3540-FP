@@ -16,7 +16,7 @@ public class HealthUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Destroy(gameObject, 10);
     }
 
     private void OnTriggerEnter(Collider other)

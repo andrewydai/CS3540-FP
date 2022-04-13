@@ -36,7 +36,7 @@ public class EnemyBehavior : MonoBehaviour
             else
             {
                 currentHealth = 0;
-                Instantiate(heartPrefab, transform.position, transform.rotation);
+                Instantiate(heartPrefab, transform.position, new Quaternion(0, 0, 0, 0));
                 enemyCount--;
                 AudioSource.PlayClipAtPoint(deathSFX, transform.position);
                 if (enemyCount == 0)
