@@ -25,10 +25,10 @@ public class Weapons : MonoBehaviour
     {
         spongeAmmoCurrent = spongeAmmoMax;
 
-        activeWeapon = "sponge";
-        broom.SetActive(false);
+        activeWeapon = "broom";
+        sponge.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        broomIcon.color = Color.gray;
+        spongeIcon.color = Color.gray;
     }
 
     // Update is called once per frame
