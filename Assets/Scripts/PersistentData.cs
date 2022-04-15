@@ -7,7 +7,7 @@ public class PersistentData : MonoBehaviour
     // source of code and method
     // https://learn.unity.com/tutorial/implement-data-persistence-between-scenes
     public static PersistentData Instance;
-    public int mouseSens = 100;
+    public int mouseSens = 5;
 
     private void Awake()
     {
