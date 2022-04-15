@@ -46,4 +46,9 @@ public class LevelManager : MonoBehaviour
     {
         objectiveText.text = "Enemies Left: " + EnemyBehavior.enemyCount;
     }
+
+    public void LoadLevel(string levelName)
+    {
+        SceneManager.LoadScene(levelName);
+    }
 }
