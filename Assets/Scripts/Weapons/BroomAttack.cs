@@ -35,5 +35,9 @@ public class BroomAttack : MonoBehaviour
             gobj.GetComponent<EnemyBounceBehavior>().BounceEnemy(player.position);
             AudioSource.PlayClipAtPoint(broomHit, player.position);
         }
+        else if(gobj.CompareTag("Boss"))
+        {
+            gobj.GetComponentInParent<BossBehavior>().TakeDamage(damage);
+        }
     }
 }

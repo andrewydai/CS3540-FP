@@ -22,11 +22,6 @@ public class EnemyKnifeChild : MonoBehaviour
         parent.WakeUp();
     }
 
-    public void FallAsleep()
-    {
-        parent.FallAsleep();
-    }
-
     public void Attack()
     {
         parent.Attack();

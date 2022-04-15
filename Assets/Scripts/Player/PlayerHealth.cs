@@ -44,6 +44,13 @@ public class PlayerHealth : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(playerDeath, transform.position);
         transform.Rotate(-90, 0, 0, Space.Self);
-        FindObjectOfType<LevelManager>().LoseLevel();
+        if(GameObject.FindGameObjectWithTag("IsBossLevel") != null)
+        {
+            FindObjectOfType<BossLevelManager>().LoseLevel();
+        }
+        else
+        {
+            FindObjectOfType<LevelManager>().LoseLevel();
+        }
     }
 }

@@ -20,6 +20,10 @@ public class SpongeProjectile : MonoBehaviour
             gobj.GetComponent<EnemyBehavior>().TakeDamage(spongeWeapon.GetComponent<SpongeAttack>().damage);
             
         }
+        else if (gobj.CompareTag("Boss"))
+        {
+            gobj.GetComponentInParent<BossBehavior>().TakeDamage(spongeWeapon.GetComponent<SpongeAttack>().damage);
+        }
         Destroy(gameObject);
     }
 }
