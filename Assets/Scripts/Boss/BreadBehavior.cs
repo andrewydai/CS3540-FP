@@ -24,7 +24,7 @@ public class BreadBehavior : MonoBehaviour
         {
             go.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
             damagedPlayer = true;
-            GetComponent<Renderer>().material.color = Color.green;
+            GetComponent<Renderer>().materials[1].color = new Color(0, 0, 0, 0);
         }
     }
 }
