@@ -26,5 +26,10 @@ public class BreadBehavior : MonoBehaviour
             damagedPlayer = true;
             GetComponent<Renderer>().materials[1].color = new Color(0, 0, 0, 0);
         }
+        else
+        {
+            var playerBounce = other.GetComponent<PlayerBounceBehavior>();
+            playerBounce.BouncePlatform(transform.up);
+        }
     }
 }
