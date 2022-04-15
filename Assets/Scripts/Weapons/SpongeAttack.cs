@@ -7,16 +7,20 @@ public class SpongeAttack : MonoBehaviour
     public int damage;
     public GameObject projectile;
     public AudioClip attackSFX;
+
+    GameObject cameraMount;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        cameraMount = GameObject.FindGameObjectWithTag("CameraMount");
     }
 
     public void Attack()
     {
+        Transform playerTransform = cameraMount.transform;
+
         AudioSource.PlayClipAtPoint(attackSFX, transform.position);
-        Transform cameraTransform = Camera.main.transform;
-        Instantiate(projectile, cameraTransform.position + cameraTransform.forward * 4, cameraTransform.rotation);
+        Instantiate(projectile, playerTransform.position + playerTransform.forward, playerTransform.rotation);
     }
 }
