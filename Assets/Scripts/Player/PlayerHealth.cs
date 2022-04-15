@@ -53,4 +53,11 @@ public class PlayerHealth : MonoBehaviour
             FindObjectOfType<LevelManager>().LoseLevel();
         }
     }
+
+    public void boostHealth(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, 100);
+        healthSlider.value = currentHealth;
+    }
 }

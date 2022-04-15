@@ -12,6 +12,12 @@ public class PlayerController : MonoBehaviour
     public float airControl = 10f;
     Animator anim;
 
+    GameObject cameraMount;
+    Vector2 turn;
+    public float rotateSensitivity = 10f;
+    public float pitchMin = -30f;
+    public float pitchMax = 30f;
+
     int idle;
     int walkForward;
     int walkBackward;
@@ -23,8 +29,13 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         _controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+
+        cameraMount = GameObject.FindGameObjectWithTag("CameraMount");
     }
 
     // Start is called before the first frame update
@@ -37,6 +48,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         NormalMoving();
+        MouseRotations();
     }
 
     void InitAnimStates()
@@ -67,6 +79,12 @@ public class PlayerController : MonoBehaviour
 
         input = (transform.right * moveHorizontal + transform.forward * moveVertical).normalized;
         input *= moveSpeed;
+
+        if (input.magnitude > 0.01f) {
+            float cameraYawRotation = Camera.main.transform.eulerAngles.y;
+            Quaternion newRotation = Quaternion.Euler(0, cameraYawRotation, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * 10);
+        }
         
         // if we are on the ground
         if (_controller.isGrounded)
@@ -113,5 +131,15 @@ public class PlayerController : MonoBehaviour
         }
         moveDirection.y -= gravity * Time.deltaTime;
         _controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    void MouseRotations()
+    {
+        turn.x += Input.GetAxis("Mouse X") * rotateSensitivity;
+        turn.y += Input.GetAxis("Mouse Y") * rotateSensitivity;
+        turn.y = Mathf.Clamp(turn.y, pitchMin, pitchMax);
+
+        transform.localRotation = Quaternion.Euler(0, turn.x, 0);
+        cameraMount.transform.localRotation = Quaternion.Euler(-turn.y, 0, 0);
     }
 }
