@@ -10,6 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     public Slider healthSlider;
     public static int enemyCount = 0;
     int currentHealth;
+    public GameObject heartPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,7 @@ public class EnemyBehavior : MonoBehaviour
             else
             {
                 currentHealth = 0;
+                Instantiate(heartPrefab, transform.position, new Quaternion(0, 0, 0, 0));
                 enemyCount--;
                 AudioSource.PlayClipAtPoint(deathSFX, transform.position);
                 if (enemyCount == 0)
