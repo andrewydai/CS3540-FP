@@ -25,7 +25,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        if(!LevelManager.isLevelOver)
+        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
+        if (bgobj != null && BossLevelManager.isLevelOver)
+        {
+            return;
+        }
+        if (!LevelManager.isLevelOver)
         {
             if (currentHealth > 0)
             {

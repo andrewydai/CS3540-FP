@@ -51,6 +51,10 @@ public class BossBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (BossLevelManager.isLevelOver)
+        {
+            return;
+        }
         agent.SetDestination(player.transform.position);
         NavMeshPath navMeshPath = new NavMeshPath();
         agent.CalculatePath(player.transform.position, navMeshPath);

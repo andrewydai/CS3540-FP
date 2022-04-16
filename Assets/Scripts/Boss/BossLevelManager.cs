@@ -21,7 +21,6 @@ public class BossLevelManager : MonoBehaviour
 
     private void EndLevel(string msg, AudioClip endSFX)
     {
-        Time.timeScale = 0;
         GetComponent<AudioSource>().Stop();
         AudioSource.PlayClipAtPoint(endSFX, Camera.main.transform.position);
         statusText.text = msg;
@@ -36,7 +35,6 @@ public class BossLevelManager : MonoBehaviour
     public void LoseLevel()
     {
         EndLevel("You Lost!", loseSFX);
-        Debug.Log("Yo");
         Invoke("ReloadLevel", 4);
     }
 
