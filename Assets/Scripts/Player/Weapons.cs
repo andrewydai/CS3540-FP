@@ -66,7 +66,20 @@ public class Weapons : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetButtonDown("Fire1") && !LevelManager.isLevelOver) {
+        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
+        if (bgobj != null)
+        {
+            if (BossLevelManager.isLevelOver)
+            {
+                return;
+            }
+        }
+        else if (LevelManager.isLevelOver)
+        {
+            return;
+        }
+
+        if (Input.GetButtonDown("Fire1")) {
             switch (activeWeapon) {
                 case "broom":
                     BroomAttack();

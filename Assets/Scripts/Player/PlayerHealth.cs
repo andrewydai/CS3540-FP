@@ -26,22 +26,27 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
-        if (bgobj != null && BossLevelManager.isLevelOver)
+        if (bgobj != null)
+        {
+            if (BossLevelManager.isLevelOver)
+            {
+                return;
+            }
+        }
+        else if (LevelManager.isLevelOver)
         {
             return;
         }
-        if (!LevelManager.isLevelOver)
-        {
-            if (currentHealth > 0)
-            {
-                currentHealth -= damageAmount;
-                healthSlider.value = currentHealth;
-            }
 
-            if (currentHealth <= 0)
-            {
-                PlayerDies();
-            }
+        if (currentHealth > 0)
+        {
+            currentHealth -= damageAmount;
+            healthSlider.value = currentHealth;
+        }
+
+        if (currentHealth <= 0)
+        {
+            PlayerDies();
         }
     }
 

@@ -24,13 +24,21 @@ public class PlateBehavior : MonoBehaviour
     void Update()
     {
         var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
-        if (bgobj != null && BossLevelManager.isLevelOver)
+        if (bgobj != null)
+        {
+            if (BossLevelManager.isLevelOver)
+            {
+                return;
+            }
+        }
+        else if (LevelManager.isLevelOver)
         {
             return;
         }
+
         // when within range, look at and move towards player
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance < aggroRange && !isAttacking && !LevelManager.isLevelOver)
+        if (distance < aggroRange && !isAttacking)
         {
             // look at
             Vector3 lookPos = target.transform.position - transform.position;

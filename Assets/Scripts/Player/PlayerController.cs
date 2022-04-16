@@ -59,11 +59,15 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
-        if (bgobj != null && BossLevelManager.isLevelOver)
+        if (bgobj != null)
         {
-            return;
+            if (!PauseBehavior.paused && !BossLevelManager.isLevelOver)
+            {
+                NormalMoving();
+                MouseRotations();
+            }
         }
-        if (!PauseBehavior.paused && !LevelManager.isLevelOver)
+        else if (!PauseBehavior.paused && !LevelManager.isLevelOver)
         {
             NormalMoving();
             MouseRotations();

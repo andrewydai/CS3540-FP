@@ -15,10 +15,21 @@ public class PlateAnimateTrigger : MonoBehaviour
 
     public void PlaySlamNoise()
     {
-        if(!LevelManager.isLevelOver)
+        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
+        if (bgobj != null)
         {
-            AudioSource.PlayClipAtPoint(slamSFX, transform.position);
+            if (BossLevelManager.isLevelOver)
+            {
+                return;
+            }
         }
+        else if (LevelManager.isLevelOver)
+        {
+            return;
+        }
+
+        AudioSource.PlayClipAtPoint(slamSFX, transform.position);
+        
     }
 
     public void ToggleAttack()
