@@ -5,6 +5,7 @@ using UnityEngine;
 public class PauseBehavior : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject gameCanvas;
     public static bool paused;
 
     // Update is called once per frame
@@ -31,6 +32,7 @@ public class PauseBehavior : MonoBehaviour
 
         paused = !paused;
         pauseMenu.SetActive(!pauseMenu.activeSelf);
+        gameCanvas.SetActive(!gameCanvas.activeSelf);
         Cursor.visible = !Cursor.visible;
     }
 }
