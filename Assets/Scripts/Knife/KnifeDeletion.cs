@@ -20,7 +20,7 @@ public class KnifeDeletion : MonoBehaviour
         bool outOfBoundsZ = transform.position.z < origin.z || transform.position.z > boxSize.z;
         if (outOfBoundsX || outOfBoundsY || outOfBoundsZ)
         {
-            Destroy(gameObject);
+           GetComponent<EnemyBehavior>().TakeDamage(1000);
         }
     }
 }
