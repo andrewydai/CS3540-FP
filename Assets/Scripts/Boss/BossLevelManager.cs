@@ -17,6 +17,10 @@ public class BossLevelManager : MonoBehaviour
         GetComponent<AudioSource>().Play();
         isLevelOver = false;
         bossHealth.maxValue = FindObjectOfType<BossBehavior>().bossHealth;
+        if (PersistentData.Instance.mouseSens == 0)
+        {
+            PersistentData.Instance.mouseSens = 2;
+        }
     }
 
     private void EndLevel(string msg, AudioClip endSFX)
