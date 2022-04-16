@@ -8,7 +8,7 @@ public class KnifeAttackScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameObject go = other.gameObject;
-        if(go.CompareTag("Player") && FindObjectOfType<BossBehavior>().isColliderDamaging)
+        if(go.CompareTag("Player"))
         {
             go.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
         }

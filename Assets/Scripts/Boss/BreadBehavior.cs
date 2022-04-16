@@ -20,16 +20,19 @@ public class BreadBehavior : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameObject go = other.gameObject;
-        if (go.CompareTag("Player") && !damagedPlayer)
+        if (go.CompareTag("Player"))
         {
-            go.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
-            damagedPlayer = true;
-            GetComponent<Renderer>().materials[1].color = new Color(0, 0, 0, 0);
-        }
-        else
-        {
-            var playerBounce = other.GetComponent<PlayerBounceBehavior>();
-            playerBounce.BouncePlatform(transform.up);
+            if(!damagedPlayer)
+            {
+                go.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
+                damagedPlayer = true;
+                GetComponent<Renderer>().materials[1].color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                var playerBounce = other.GetComponent<PlayerBounceBehavior>();
+                playerBounce.BouncePlatform(transform.up);
+            }
         }
     }
 }

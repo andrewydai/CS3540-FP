@@ -36,6 +36,7 @@ public class BossLevelManager : MonoBehaviour
     public void LoseLevel()
     {
         EndLevel("You Lost!", loseSFX);
+        Debug.Log("Yo");
         Invoke("ReloadLevel", 4);
     }
 
@@ -59,5 +60,15 @@ public class BossLevelManager : MonoBehaviour
                 bossHealth.value = currentBossHealth;
             }
         }
+    }
+
+    public void LoadLevel(string levelName)
+    {
+        if (PauseBehavior.paused)
+        {
+            PauseBehavior.paused = false;
+            Time.timeScale = 1;
+        }
+        SceneManager.LoadScene(levelName);
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +34,11 @@ public class BossBehaviorChild : MonoBehaviour
     void SetIdle()
     {
         anim.SetInteger("animState", 0);
+        var colliders = new ArraySegment<BoxCollider>(GetComponents<BoxCollider>(), 2, 3);
+        foreach (BoxCollider bc in colliders)
+        {
+            bc.isTrigger = false;
+        }
         parentScript.isColliderDamaging = false;
         AudioSource.PlayClipAtPoint(parentScript.moveSFX, Camera.main.transform.position);
     }
@@ -53,6 +59,11 @@ public class BossBehaviorChild : MonoBehaviour
         if (go.CompareTag("Player") && parentScript.isColliderDamaging)
         {
             parentScript.isColliderDamaging = false;
+            var colliders = new ArraySegment<BoxCollider>(GetComponents<BoxCollider>(), 2, 3);
+            foreach (BoxCollider bc in colliders)
+            {
+                bc.isTrigger = false;
+            }
             go.GetComponent<PlayerHealth>().TakeDamage(smashDamageAmount);
         }
     }

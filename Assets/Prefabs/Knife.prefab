@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 4069310588875176102}
   - component: {fileID: 8729676228158432586}
   - component: {fileID: 5445061222682946521}
+  - component: {fileID: 6524588842164756549}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Enemy
@@ -372,6 +373,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6524588842164756549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4069310588875176099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 295aff5f90f71054db14b6378ed4d528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxSize: {x: 0, y: 0, z: 0}
+  origin: {x: 0, y: 0, z: 0}
 --- !u!1 &5770108899361882739
 GameObject:
   m_ObjectHideFlags: 0

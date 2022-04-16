@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -53,7 +54,7 @@ public class BossBehavior : MonoBehaviour
         agent.SetDestination(player.transform.position);
         NavMeshPath navMeshPath = new NavMeshPath();
         agent.CalculatePath(player.transform.position, navMeshPath);
-        canReachPlayer = navMeshPath.status != NavMeshPathStatus.PathPartial;
+        canReachPlayer = navMeshPath.status != NavMeshPathStatus.PathPartial && player.GetComponent<CharacterController>().isGrounded;
         switch (currentState)
         {
             case FSMStates.Ranged:
@@ -69,7 +70,7 @@ public class BossBehavior : MonoBehaviour
     {
         if(rangedTimer < 0)
         {
-            int animAttack = Random.Range(1, 3);
+            int animAttack = UnityEngine.Random.Range(1, 3);
             anim.SetInteger("animState", animAttack);
             rangedTimer = rangedCooldown;
         }
@@ -89,8 +90,16 @@ public class BossBehavior : MonoBehaviour
     {
         if (meleeTimer < 0)
         {
-            isColliderDamaging = true;
-            int animAttack = Random.Range(3, 5);
+            int animAttack = UnityEngine.Random.Range(3, 5);
+            if(animAttack == 4)
+            {
+                isColliderDamaging = true;
+                var colliders = new ArraySegment<BoxCollider>(GetComponentsInChildren<BoxCollider>(), 2, 3);
+                foreach(BoxCollider bc in colliders)
+                {
+                    bc.isTrigger = true;
+                }
+            }
             anim.SetInteger("animState", animAttack);
             meleeTimer = meleeCooldown;
         }

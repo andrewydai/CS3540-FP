@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
     public void WinLevel()
     {
         EndLevel("Kitchen Cleaned!", winSFX);
+        Invoke("LoadNextLevel", 4);
     }
 
     public void LoseLevel()
@@ -42,6 +43,11 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 
+    private void LoadNextLevel()
+    {
+        SceneManager.LoadScene("Level1_boss");
+    }
+
     public void Update()
     {
         objectiveText.text = "Enemies Left: " + EnemyBehavior.enemyCount;
@@ -49,6 +55,11 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(string levelName)
     {
+        if(PauseBehavior.paused)
+        {
+            PauseBehavior.paused = false;
+            Time.timeScale = 1;
+        }
         SceneManager.LoadScene(levelName);
     }
 }
