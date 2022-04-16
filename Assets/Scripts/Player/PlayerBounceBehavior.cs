@@ -35,7 +35,6 @@ public class PlayerBounceBehavior : MonoBehaviour
 
     public void BouncePlatform(Vector3 platformDirection)
     {
-        Debug.Log("Player on bounce platform");
         platformImpact += -platformDirection * platformBounceStrength;
     }
 }

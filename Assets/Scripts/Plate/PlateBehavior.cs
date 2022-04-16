@@ -23,6 +23,11 @@ public class PlateBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
+        if (bgobj != null && BossLevelManager.isLevelOver)
+        {
+            return;
+        }
         // when within range, look at and move towards player
         float distance = Vector3.Distance(transform.position, target.transform.position);
         if (distance < aggroRange && !isAttacking && !LevelManager.isLevelOver)

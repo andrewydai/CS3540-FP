@@ -10,11 +10,11 @@ public class PlayerController : MonoBehaviour
     Vector3 input, moveDirection;
     CharacterController _controller;
     public float airControl = 10f;
+    PersistentData settings;
     Animator anim;
 
     GameObject cameraMount;
     Vector2 turn;
-    public float rotateSensitivity = 10f;
     public float pitchMin = -30f;
     public float pitchMax = 30f;
 
@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     int strafeLeft;
     int strafeRight;
     int roll;
+    
+    // for game dev usage
+    public GameObject dataPrefab;
 
     void Awake()
     {
@@ -36,6 +39,14 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         cameraMount = GameObject.FindGameObjectWithTag("CameraMount");
+
+        settings = PersistentData.Instance;
+        // if debugging without going through menu, create new instance
+        if (settings == null)
+        {
+            Instantiate(dataPrefab);
+            settings = GameObject.FindGameObjectWithTag("Data").GetComponent<PersistentData>();
+        }
     }
 
     // Start is called before the first frame update
@@ -47,8 +58,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        NormalMoving();
-        MouseRotations();
+        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
+        if (bgobj != null && BossLevelManager.isLevelOver)
+        {
+            return;
+        }
+        if (!PauseBehavior.paused && !LevelManager.isLevelOver)
+        {
+            NormalMoving();
+            MouseRotations();
+        }
     }
 
     void InitAnimStates()
@@ -135,8 +154,8 @@ public class PlayerController : MonoBehaviour
 
     void MouseRotations()
     {
-        turn.x += Input.GetAxis("Mouse X") * rotateSensitivity;
-        turn.y += Input.GetAxis("Mouse Y") * rotateSensitivity;
+        turn.x += Input.GetAxis("Mouse X") * settings.mouseSens;
+        turn.y += Input.GetAxis("Mouse Y") * settings.mouseSens;
         turn.y = Mathf.Clamp(turn.y, pitchMin, pitchMax);
 
         transform.localRotation = Quaternion.Euler(0, turn.x, 0);

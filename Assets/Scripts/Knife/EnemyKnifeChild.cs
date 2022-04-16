@@ -22,7 +22,7 @@ public class EnemyKnifeChild : MonoBehaviour
         parent.WakeUp();
     }
 
-    public void FallAsleep()
+    public void FallASleep()
     {
         parent.FallAsleep();
     }

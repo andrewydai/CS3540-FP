@@ -28,6 +28,7 @@ public class PauseBehavior : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0.0f;
         }
+
         paused = !paused;
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         Cursor.visible = !Cursor.visible;
