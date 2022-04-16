@@ -19,7 +19,10 @@ public class BossLevelManager : MonoBehaviour
         bossHealth.maxValue = FindObjectOfType<BossBehavior>().bossHealth;
         if (PersistentData.Instance.mouseSens == 0)
         {
-            PersistentData.Instance.mouseSens = 2;
+            PersistentData.Instance.mouseSens = 5;
+            ChangeMouseSens mouseSens = GameObject.FindGameObjectWithTag("MouseSens").GetComponent<ChangeMouseSens>();
+            mouseSens.sensSlider.value = 5;
+            mouseSens.sensInput.text = "5";
         }
     }
 

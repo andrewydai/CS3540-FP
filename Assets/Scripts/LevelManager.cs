@@ -17,6 +17,14 @@ public class LevelManager : MonoBehaviour
         GetComponent<AudioSource>().Play();
         isLevelOver = false;
         EnemyBehavior.enemyCount = 0;
+        
+        if (PersistentData.Instance.mouseSens == 0)
+        {
+            PersistentData.Instance.mouseSens = 5;
+            ChangeMouseSens mouseSens = GameObject.FindGameObjectWithTag("MouseSens").GetComponent<ChangeMouseSens>();
+            mouseSens.sensSlider.value = 5;
+            mouseSens.sensInput.text = "5";
+        }
     }
 
     private void EndLevel(string msg, AudioClip endSFX)
