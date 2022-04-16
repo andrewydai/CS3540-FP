@@ -9,6 +9,7 @@ public class Weapons : MonoBehaviour
     public GameObject sponge;
     public Image broomIcon;
     public Image spongeIcon;
+    public Slider spongeSlider;
 
     PlayerController player;
     string activeWeapon;
@@ -24,6 +25,7 @@ public class Weapons : MonoBehaviour
     void Start()
     {
         spongeAmmoCurrent = spongeAmmoMax;
+        spongeSlider.maxValue = spongeShootRate;
 
         activeWeapon = "broom";
         sponge.SetActive(false);
@@ -40,6 +42,7 @@ public class Weapons : MonoBehaviour
 
         elapsedReloadTime += Time.deltaTime;
         elapsedShootTime += Time.deltaTime;
+        DisplayCooldown();
     }
 
     void WeaponChange()
@@ -92,6 +95,7 @@ public class Weapons : MonoBehaviour
 
             spongeAmmoCurrent -= 1;
             elapsedShootTime = 0f;
+            spongeSlider.value = 0;
         }
     }
 
@@ -101,5 +105,10 @@ public class Weapons : MonoBehaviour
             spongeAmmoCurrent += 1;
             elapsedReloadTime = 0f;
         }
+    }
+    
+    void DisplayCooldown()
+    {
+        spongeSlider.value = Mathf.Clamp(elapsedShootTime, 0, spongeShootRate); 
     }
 }
