@@ -21,11 +21,15 @@ public class Weapons : MonoBehaviour
     public float spongeShootRate = 1.3f;
     float elapsedShootTime;
 
+    private float broomAttackRate = 0.75f;
+    private float elapsedBroomAttackTime;
+
     // Start is called before the first frame update
     void Start()
     {
         spongeAmmoCurrent = spongeAmmoMax;
         spongeSlider.maxValue = spongeShootRate;
+        elapsedBroomAttackTime = 0;
 
         activeWeapon = "broom";
         sponge.SetActive(false);
@@ -42,6 +46,7 @@ public class Weapons : MonoBehaviour
 
         elapsedReloadTime += Time.deltaTime;
         elapsedShootTime += Time.deltaTime;
+        elapsedBroomAttackTime += Time.deltaTime;
         DisplayCooldown();
     }
 
@@ -96,8 +101,12 @@ public class Weapons : MonoBehaviour
 
     void BroomAttack()
     {
-        broom.GetComponentInChildren<BroomAttack>().SetAttacking();
-        player.Attack();
+        if (elapsedBroomAttackTime >= broomAttackRate)
+        {
+            broom.GetComponentInChildren<BroomAttack>().SetAttacking();
+            player.Attack();
+            elapsedBroomAttackTime = 0;
+        }
     }
 
     void SpongeAttack()
