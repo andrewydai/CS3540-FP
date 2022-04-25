@@ -31,4 +31,14 @@ public class EnemyKnifeChild : MonoBehaviour
     {
         parent.Attack();
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        GameObject go = other.gameObject;
+        if (go.tag == "Player")
+        {
+            AudioSource.PlayClipAtPoint(parent.hitSFX, parent.player.transform.position);
+            go.GetComponent<PlayerHealth>().TakeDamage(parent.damage);
+        }
+    }
 }

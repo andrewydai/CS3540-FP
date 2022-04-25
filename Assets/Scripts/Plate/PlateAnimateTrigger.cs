@@ -15,15 +15,7 @@ public class PlateAnimateTrigger : MonoBehaviour
 
     public void PlaySlamNoise()
     {
-        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
-        if (bgobj != null)
-        {
-            if (BossLevelManager.isLevelOver)
-            {
-                return;
-            }
-        }
-        else if (LevelManager.isLevelOver)
+        if (LevelManager.isLevelOver)
         {
             return;
         }
@@ -37,18 +29,8 @@ public class PlateAnimateTrigger : MonoBehaviour
         parent.ToggleAttack();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void SetTrigger(bool isTrigger)
     {
-        if (other.CompareTag("Player") && parent.isAttacking) {
-            var playerHealth = other.GetComponent<PlayerHealth>();
-            var playerBounce = other.GetComponent<PlayerBounceBehavior>();
-            playerHealth.TakeDamage(parent.damageAmount);
-            playerBounce.BouncePlayer(parent.transform.forward, parent.transform.position);
-        }
-        /*
-        if (other.CompareTag("Enemy"))
-        {
-            other.gameObject.GetComponentInParent<EnemyBehavior>().
-        }*/
+        GetComponentsInChildren<BoxCollider>()[1].isTrigger = isTrigger;
     }
 }

@@ -40,6 +40,11 @@ public class EnemyKnife : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(LevelManager.isLevelOver)
+        {
+            return;
+        }
+
         switch (currentstate)
         {
             case FSMState.Asleep:
@@ -124,16 +129,7 @@ public class EnemyKnife : MonoBehaviour
         if(currentstate == FSMState.Attack)
         {
             rb.useGravity = true;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        GameObject go = other.gameObject;
-        if(go.tag == "Player")
-        {
-            AudioSource.PlayClipAtPoint(hitSFX, player.transform.position);
-            go.GetComponent<PlayerHealth>().TakeDamage(damage);
+            rb.detectCollisions = true;
         }
     }
 

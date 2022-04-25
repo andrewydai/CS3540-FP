@@ -25,15 +25,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
-        if (bgobj != null)
-        {
-            if (BossLevelManager.isLevelOver)
-            {
-                return;
-            }
-        }
-        else if (LevelManager.isLevelOver)
+        if (LevelManager.isLevelOver)
         {
             return;
         }
@@ -54,14 +46,7 @@ public class PlayerHealth : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(playerDeath, transform.position);
         transform.Rotate(-90, 0, 0, Space.Self);
-        if(GameObject.FindGameObjectWithTag("IsBossLevel") != null)
-        {
-            FindObjectOfType<BossLevelManager>().LoseLevel();
-        }
-        else
-        {
-            FindObjectOfType<LevelManager>().LoseLevel();
-        }
+        FindObjectOfType<LevelManager>().LoseLevel();
     }
 
     public void boostHealth(int amount)
