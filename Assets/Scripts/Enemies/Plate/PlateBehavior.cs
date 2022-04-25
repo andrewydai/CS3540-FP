@@ -23,15 +23,7 @@ public class PlateBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
-        if (bgobj != null)
-        {
-            if (BossLevelManager.isLevelOver)
-            {
-                return;
-            }
-        }
-        else if (LevelManager.isLevelOver)
+        if (LevelManager.isLevelOver)
         {
             return;
         }
@@ -62,7 +54,7 @@ public class PlateBehavior : MonoBehaviour
                 isAttacking = true;
                 GetComponent<Rigidbody>().isKinematic = true;
                 GetComponentInChildren<Animator>().SetTrigger("isAttacking");
-                GetComponentInChildren<BoxCollider>().isTrigger = true;
+                GetComponentInChildren<PlateAnimateTrigger>().SetTrigger(true);
             }
         }
     }
@@ -72,7 +64,7 @@ public class PlateBehavior : MonoBehaviour
         isAttacking = false;
         transform.position += transform.forward * 1.6f;
         GetComponent<Rigidbody>().isKinematic = false;
-        GetComponentInChildren<BoxCollider>().isTrigger = false;
+        GetComponentInChildren<PlateAnimateTrigger>().SetTrigger(false);
     }
 
 }

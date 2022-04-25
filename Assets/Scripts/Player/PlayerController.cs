@@ -58,20 +58,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
-        if (bgobj != null)
+        if(LevelManager.isLevelOver)
         {
-            if (!PauseBehavior.paused && !BossLevelManager.isLevelOver)
-            {
-                NormalMoving();
-                MouseRotations();
-            }
+            return;
         }
-        else if (!PauseBehavior.paused && !LevelManager.isLevelOver)
-        {
-            NormalMoving();
-            MouseRotations();
-        }
+
+        NormalMoving();
+        MouseRotations();
     }
 
     void InitAnimStates()

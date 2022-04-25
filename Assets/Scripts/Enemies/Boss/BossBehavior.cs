@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class BossBehavior : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class BossBehavior : MonoBehaviour
     public float plateForce;
     public float meleeCooldown;
     public bool isColliderDamaging = false;
+    public AudioClip loadBreadSFX;
     public AudioClip toastShootSFX;
     public AudioClip plateShootSFX;
     public AudioClip plateSlamSFX;
@@ -29,6 +31,9 @@ public class BossBehavior : MonoBehaviour
     public AudioClip moveSFX;
     public int bossHealth;
     public int currentHealth;
+    public ParticleSystem deathFX;
+    public Slider bossHealthSlider;
+    public Slider bossYellowHealthSlider;
     bool canReachPlayer;
     float meleeTimer;
     float rangedTimer = 0;
@@ -46,15 +51,20 @@ public class BossBehavior : MonoBehaviour
         currentState = FSMStates.Ranged;
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(player.transform.position);
+        bossHealthSlider.maxValue = bossHealth;
+        bossHealthSlider.value = bossHealth;
+        bossYellowHealthSlider.maxValue = bossHealth;
+        bossYellowHealthSlider.value = bossHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (BossLevelManager.isLevelOver)
+        if (LevelManager.isLevelOver)
         {
             return;
         }
+
         agent.SetDestination(player.transform.position);
         NavMeshPath navMeshPath = new NavMeshPath();
         agent.CalculatePath(player.transform.position, navMeshPath);
@@ -109,7 +119,6 @@ public class BossBehavior : MonoBehaviour
         }
         else
         {
-            //FacePlayer();
             meleeTimer -= Time.deltaTime;
         }
 
@@ -117,6 +126,11 @@ public class BossBehavior : MonoBehaviour
         {
             currentState = FSMStates.Ranged;
         }
+    }
+
+    public void LoadBread()
+    {
+        AudioSource.PlayClipAtPoint(loadBreadSFX, Camera.main.transform.position);
     }
 
     public void FireBread()
@@ -137,7 +151,37 @@ public class BossBehavior : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        if (LevelManager.isLevelOver)
+        {
+            return;
+        }
+
         currentHealth -= damageAmount;
+        
+        if (currentHealth <= 0)
+        {
+            Death();
+            FindObjectOfType<LevelManager>().WinLevel();
+            bossHealthSlider.value = 0;
+            bossYellowHealthSlider.value = 0;
+        }
+        else
+        {
+            bossHealthSlider.value = currentHealth;
+            StartCoroutine(LerpYellowHealth());
+        }
+    }
+
+    IEnumerator LerpYellowHealth()
+    {
+        yield return new WaitForSeconds(2f);
+        float t = 1;
+        while (bossYellowHealthSlider.value > currentHealth)
+        {
+            bossYellowHealthSlider.value = Mathf.MoveTowards(bossYellowHealthSlider.value, currentHealth, t);
+            yield return null;
+        }
+        yield return null;
     }
 
     void FacePlayer()
@@ -146,5 +190,11 @@ public class BossBehavior : MonoBehaviour
         directionToTarget.y = 0;
         Quaternion lookRotation = Quaternion.LookRotation(directionToTarget.normalized);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, lookSpeed * Time.deltaTime);
+    }
+
+    public void Death()
+    {
+        Instantiate(deathFX, transform.position, Quaternion.Euler(new Vector3(-70.063f, 124.382f, -131.329f)));
+        Destroy(gameObject);
     }
 }

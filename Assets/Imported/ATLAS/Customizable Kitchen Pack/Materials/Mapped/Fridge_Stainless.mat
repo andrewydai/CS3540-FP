@@ -24,8 +24,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Shininess: 0.03303574
+    - _Shininess: 0.2
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Color: {r: 0.7971698, g: 1, b: 0.9808013, a: 1}
+    - _SpecColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
   m_BuildTextureStacks: []

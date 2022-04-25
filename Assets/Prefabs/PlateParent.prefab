@@ -175,8 +175,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9843378, y: 0.97058046, z: 1.3500929}
+  m_Center: {x: -0.0028769176, y: 0.004368782, z: 0.15463531}
 --- !u!1 &1170565947412636124
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +192,8 @@ GameObject:
   - component: {fileID: 7966442512009070116}
   - component: {fileID: 8979438309719452087}
   - component: {fileID: 6093587232641049633}
+  - component: {fileID: 2548271808513162118}
+  - component: {fileID: 5237121978942205740}
   m_Layer: 0
   m_Name: PlateParent
   m_TagString: Enemy
@@ -390,6 +392,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: 8
+--- !u!65 &2548271808513162118
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170565947412636124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.7606447}
+  m_Center: {x: 0, y: 0, z: 0.011969924}
+--- !u!114 &5237121978942205740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170565947412636124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 295aff5f90f71054db14b6378ed4d528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxSize: {x: 21.991, y: 19.985, z: 22.008}
+  origin: {x: -32.023, y: -1.986, z: -22.016}
 --- !u!1 &3427548576729621526
 GameObject:
   m_ObjectHideFlags: 0

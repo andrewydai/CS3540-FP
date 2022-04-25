@@ -15,10 +15,9 @@ public class BossBehaviorChild : MonoBehaviour
         parentScript = GetComponentInParent<BossBehavior>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void LoadBread()
     {
-
+        parentScript.LoadBread();
     }
 
     void FireBread()
