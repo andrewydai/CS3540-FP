@@ -279,6 +279,8 @@ MonoBehaviour:
   deathSFX: {fileID: 8300000, guid: 7a18b23d428e9024d9fe7614c994128b, type: 3}
   healthSlider: {fileID: 8949436966239343437}
   heartPrefab: {fileID: 7741614382274929807, guid: b3ab4430a552e234e9f892bd01399ccf, type: 3}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
+  damagedTime: 0.5
 --- !u!82 &5445061222682946521
 AudioSource:
   m_ObjectHideFlags: 0

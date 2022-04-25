@@ -11,6 +11,13 @@ public class EnemyBehavior : MonoBehaviour
     public static int enemyCount = 0;
     int currentHealth;
     public GameObject heartPrefab;
+
+    public Color damageColor;
+    public float damagedTime = 0.5f;
+
+    private Renderer enemyRenderer;
+    private Color originalColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,17 +25,18 @@ public class EnemyBehavior : MonoBehaviour
         currentHealth = health;
         healthSlider.maxValue = health;
         healthSlider.value = currentHealth;
+        enemyRenderer = GetComponentInChildren<Renderer>();
+        originalColor = enemyRenderer.material.color;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void TakeDamage(int damageAmount)
     {
         if(currentHealth != 0)
         {
+
+            // flash red on hit
+            StartCoroutine(FlashDamagedColor());
+
             if (currentHealth > damageAmount)
             {
                 currentHealth -= damageAmount;
@@ -48,5 +56,12 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         healthSlider.value = currentHealth;
+    }
+
+    IEnumerator FlashDamagedColor()
+    {
+        enemyRenderer.material.color = damageColor;
+        yield return new WaitForSeconds(damagedTime);
+        enemyRenderer.material.color = originalColor;
     }
 }
