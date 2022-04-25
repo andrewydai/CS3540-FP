@@ -20,7 +20,7 @@ public class BroomAttack : MonoBehaviour
     public void SetAttacking()
     {
         isAttacking = true;
-        Invoke("UnsetAttacking", 0.5f);
+        Invoke("UnsetAttacking", 0.75f);
     }
 
     void UnsetAttacking()

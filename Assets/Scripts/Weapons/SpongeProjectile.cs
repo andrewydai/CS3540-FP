@@ -29,6 +29,8 @@ public class SpongeProjectile : MonoBehaviour
         {
             return;
         }
+        Debug.Log(gobj.name);
+        Debug.Log(gobj.CompareTag("Enemy"));
         hit = true;
         if (gobj.CompareTag("Enemy"))
         {
