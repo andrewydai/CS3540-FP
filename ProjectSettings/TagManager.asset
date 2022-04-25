@@ -8,6 +8,8 @@ TagManager:
   - Boss
   - IsBossLevel
   - CameraMount
+  - Data
+  - Cheesepoint
   layers:
   - Default
   - TransparentFX
