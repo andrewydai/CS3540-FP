@@ -31,6 +31,17 @@ public class PlateAnimateTrigger : MonoBehaviour
 
     public void SetTrigger(bool isTrigger)
     {
-        GetComponentsInChildren<BoxCollider>()[1].isTrigger = isTrigger;
+        GetComponent<BoxCollider>().isTrigger = isTrigger;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && parent.isAttacking)
+        {
+            var playerHealth = other.GetComponent<PlayerHealth>();
+            var playerBounce = other.GetComponent<PlayerBounceBehavior>();
+            playerHealth.TakeDamage(parent.damageAmount);
+            playerBounce.BouncePlayer(parent.transform.forward, parent.transform.position);
+        }
     }
 }
