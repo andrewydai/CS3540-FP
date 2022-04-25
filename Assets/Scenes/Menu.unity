@@ -451,6 +451,36 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &48493838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 48493839}
+  m_Layer: 0
+  m_Name: CameraPanSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &48493839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48493838}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.4, y: 3.16, z: -2.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &138738799
 Mesh:
   m_ObjectHideFlags: 0
@@ -2109,23 +2139,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8782015117431307046, guid: 38841e2494727614d88ce4dadee8a96a, type: 3}
       propertyPath: m_Color.a
-      value: 0.7607843
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8782015117431307046, guid: 38841e2494727614d88ce4dadee8a96a, type: 3}
       propertyPath: m_Color.b
-      value: 0.3238003
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8782015117431307046, guid: 38841e2494727614d88ce4dadee8a96a, type: 3}
       propertyPath: m_Color.g
-      value: 0.31777322
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8782015117431307046, guid: 38841e2494727614d88ce4dadee8a96a, type: 3}
       propertyPath: m_Color.r
-      value: 0.3490566
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8782015117699394803, guid: 38841e2494727614d88ce4dadee8a96a, type: 3}
       propertyPath: m_Name
       value: MenuCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782015117699394803, guid: 38841e2494727614d88ce4dadee8a96a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8782015117699394807, guid: 38841e2494727614d88ce4dadee8a96a, type: 3}
       propertyPath: m_Pivot.x
@@ -2137,7 +2171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8782015117699394807, guid: 38841e2494727614d88ce4dadee8a96a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8782015117699394807, guid: 38841e2494727614d88ce4dadee8a96a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3764,7 +3798,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 73
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3790,7 +3824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457447283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.11, z: -10}
+  m_LocalPosition: {x: 0, y: 15.78, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3808,6 +3842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6fbda26e0a2c247acb78ca2b00dd94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.05
+  radius: 15
+  target: {fileID: 48493839}
 --- !u!43 &1502926821
 Mesh:
   m_ObjectHideFlags: 0
