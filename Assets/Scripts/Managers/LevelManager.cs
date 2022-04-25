@@ -14,12 +14,17 @@ public class LevelManager : MonoBehaviour
     public string currentLevel;
     public string nextLevel;
     public Text statusText;
+    public GameObject persistentDataPrefab;
     // Start is called before the first frame update
     void Awake()
     {
         GetComponent<AudioSource>().Play();
         isLevelOver = false;
-        
+        if(PersistentData.Instance == null)
+        {
+            Instantiate(persistentDataPrefab);
+        }
+
         if (PersistentData.Instance.mouseSens == 0)
         {
             PersistentData.Instance.mouseSens = 5;
