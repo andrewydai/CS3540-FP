@@ -2238,6 +2238,9 @@ MonoBehaviour:
   jumpHeight: 4
   moveSpeed: 6
   airControl: 6
+  pitchMin: -30
+  pitchMax: 30
+  dataPrefab: {fileID: 0}
 --- !u!143 &9051303801679180208
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2269,6 +2272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactStrength: 10
+  platformBounceStrength: 40
 --- !u!114 &7553790174834817883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2300,6 +2304,10 @@ MonoBehaviour:
   sponge: {fileID: 6183829763391159014}
   broomIcon: {fileID: 0}
   spongeIcon: {fileID: 0}
+  spongeSlider: {fileID: 0}
+  spongeAmmoMax: 0
+  spongeReloadRate: 0
+  spongeShootRate: 1.3
 --- !u!136 &155575223
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2464,6 +2472,11 @@ PrefabInstance:
     - {fileID: 8041925783316741517, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
     - {fileID: -4907030808254891995, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
+--- !u!1 &5166687601510994744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3958131858181366061, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
+  m_PrefabInstance: {fileID: 8168923944220684821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5166687601510994745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3958131858181366060, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
@@ -2474,30 +2487,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3958131857580080198, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
   m_PrefabInstance: {fileID: 8168923944220684821}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5166687600176994673 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3958131858994359140, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
-  m_PrefabInstance: {fileID: 8168923944220684821}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5166687601510994744 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3958131858181366061, guid: cb0168988b08aae48b6abd251b1d015c, type: 3}
-  m_PrefabInstance: {fileID: 8168923944220684821}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &70413106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5166687600176994673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7cb6a4660a4af94a93312103962390c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  broomHit: {fileID: 8300000, guid: 539d9fb5a5535fb448b38a137c3d023d, type: 3}
 --- !u!114 &706627735
 MonoBehaviour:
   m_ObjectHideFlags: 0
