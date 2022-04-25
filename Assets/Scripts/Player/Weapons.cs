@@ -66,15 +66,7 @@ public class Weapons : MonoBehaviour
 
     void Attack()
     {
-        var bgobj = GameObject.FindGameObjectWithTag("IsBossLevel");
-        if (bgobj != null)
-        {
-            if (BossLevelManager.isLevelOver)
-            {
-                return;
-            }
-        }
-        else if (LevelManager.isLevelOver)
+        if (LevelManager.isLevelOver)
         {
             return;
         }
