@@ -10,7 +10,8 @@ TagManager:
   - CameraMount
   - Data
   - MouseSens
-  - ConfirmModal
+  - Fluid
+  - Cheesepoint
   layers:
   - Default
   - TransparentFX

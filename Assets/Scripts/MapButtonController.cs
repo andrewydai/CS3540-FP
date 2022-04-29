@@ -11,25 +11,24 @@ public class MapButtonController : MonoBehaviour
     public float moveTime = 1f;
 
     private GameObject confirmModal;
-    
-    private PersistentData data;
+    private int playerLevel;
 
-    void Start()
+    void Awake()
     {
-        data = PersistentData.Instance;
-        confirmModal = GameObject.FindGameObjectWithTag("ConfirmModal");
-        confirmModal.SetActive(false);
+        playerLevel = PlayerPrefs.GetInt("playerLevel", 0);
+        StartPlayerAtLevel();
     }
 
     public void MovePlayer()
     {
+        playerLevel = PlayerPrefs.GetInt("playerLevel");
         // don't move if clicked on same level
-        if (data.playerLocation == selfLocation)
+        if (playerLevel == selfLocation)
         {
             return;
         }
 
-        if (data.playerLocation < selfLocation)
+        if (playerLevel < selfLocation)
         {
             StartCoroutine(LeftToRight());
         }
@@ -37,29 +36,26 @@ public class MapButtonController : MonoBehaviour
         {
             StartCoroutine(RightToLeft());
         }
-        confirmModal.SetActive(true);
-        confirmModal.GetComponentInChildren<TMP_Text>().text = $"Do you want to load {gameObject.name}?"; 
+        PlayerPrefs.SetInt("playerLevel", selfLocation);
     }
 
     IEnumerator LeftToRight()
     {
-        for (int index = data.playerLocation; index < selfLocation; index++)
+        for (int index = playerLevel; index < selfLocation; index++)
         {
             StartCoroutine(MoveAlongPath(index, 0, 1));
             yield return new WaitForSeconds(moveTime);
         }
-        data.playerLocation = selfLocation;
     }
 
     // copy of function above with reverse direction, too lazy to generalize sorry
     IEnumerator RightToLeft()
     {
-        for (int index = data.playerLocation; index > selfLocation; index--)
+        for (int index = playerLevel; index > selfLocation; index--)
         {
             StartCoroutine(MoveAlongPath(index - 1, 1, 0));
             yield return new WaitForSeconds(moveTime);
         }
-        data.playerLocation = selfLocation;
     }
 
     IEnumerator MoveAlongPath(int pathIndex, int start, int end)
@@ -83,5 +79,21 @@ public class MapButtonController : MonoBehaviour
             path.value = Mathf.Lerp(start, end, lerpTime);
             yield return null;
         }
+    }
+
+    void StartPlayerAtLevel()
+    {
+        Slider path;
+        if (playerLevel < paths.Length)
+        {
+            path = paths[playerLevel];
+            path.value = 0;
+        }
+        else
+        {
+            path = paths[playerLevel - 1];
+            path.value = 1;
+        }
+        path.handleRect.gameObject.SetActive(true);
     }
 }

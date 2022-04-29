@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     Vector3 input, moveDirection;
     CharacterController _controller;
     public float airControl = 10f;
-    PersistentData settings;
     Animator anim;
 
     GameObject cameraMount;
@@ -25,40 +24,31 @@ public class PlayerController : MonoBehaviour
     int attack;
     int strafeLeft;
     int strafeRight;
-    int roll;
-    
-    // for game dev usage
-    public GameObject dataPrefab;
 
+    private float mouseSens;
+    
     void Awake()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
+        
         _controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
 
         cameraMount = GameObject.FindGameObjectWithTag("CameraMount");
-
-        settings = PersistentData.Instance;
-        // if debugging without going through menu, create new instance
-        if (settings == null)
-        {
-            Instantiate(dataPrefab);
-            settings = GameObject.FindGameObjectWithTag("Data").GetComponent<PersistentData>();
-        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         InitAnimStates();
+        UpdateMouseSens();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(LevelManager.isLevelOver)
+        if(LevelManager.isLevelOver || PauseBehavior.paused)
         {
             return;
         }
@@ -151,11 +141,16 @@ public class PlayerController : MonoBehaviour
 
     void MouseRotations()
     {
-        turn.x += Input.GetAxis("Mouse X") * settings.mouseSens;
-        turn.y += Input.GetAxis("Mouse Y") * settings.mouseSens;
+        turn.x += Input.GetAxis("Mouse X") * mouseSens;
+        turn.y += Input.GetAxis("Mouse Y") * mouseSens;
         turn.y = Mathf.Clamp(turn.y, pitchMin, pitchMax);
 
         transform.localRotation = Quaternion.Euler(0, turn.x, 0);
         cameraMount.transform.localRotation = Quaternion.Euler(-turn.y, 0, 0);
+    }
+
+    public void UpdateMouseSens()
+    {
+        mouseSens = PlayerPrefs.GetFloat("mouseSens", 5f);
     }
 }
