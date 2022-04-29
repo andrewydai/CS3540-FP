@@ -12,26 +12,16 @@ public class LevelManager : MonoBehaviour
     public string winMessage;
     public string loseMessage;
     public string currentLevel;
-    public string nextLevel;
     public Text statusText;
-    public GameObject dataPrefab;
+
+    public static float mouseSens;
+
     // Start is called before the first frame update
     void Awake()
     {
+        mouseSens = Mathf.Clamp(PlayerPrefs.GetFloat("mouseSens", 5), 2, 10);
         GetComponent<AudioSource>().Play();
         isLevelOver = false;
-        if(PersistentData.Instance == null)
-        {
-            Instantiate(dataPrefab);
-        }
-        
-        if (PersistentData.Instance.mouseSens == 0)
-        {
-            PersistentData.Instance.mouseSens = 5;
-            ChangeMouseSens mouseSens = GameObject.FindGameObjectWithTag("MouseSens").GetComponent<ChangeMouseSens>();
-            mouseSens.sensSlider.value = 5;
-            mouseSens.sensInput.text = "5";
-        }
     }
 
     private void EndLevel(string msg, AudioClip endSFX)
@@ -61,10 +51,7 @@ public class LevelManager : MonoBehaviour
 
     private void LoadNextLevel()
     {
-        if(nextLevel != "")
-        {
-            SceneManager.LoadScene(nextLevel);
-        }
+        SceneManager.LoadScene("Map");
     }
 
     public void LoadLevel(string levelName)

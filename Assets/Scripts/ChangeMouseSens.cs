@@ -8,47 +8,44 @@ public class ChangeMouseSens : MonoBehaviour
 {
     public TMP_InputField sensInput;
     public Slider sensSlider;
-    public int defaultSens;
-    public PersistentData settings;
-    public GameObject dataPrefab;
 
-    private int maxSens;
+    private float maxSens;
 
 
     void Awake()
     {
-        settings = PersistentData.Instance;
-        // if debugging without going through menu, create new instance
-        if (settings == null)
-        {
-            Instantiate(dataPrefab);
-            settings = GameObject.FindGameObjectWithTag("Data").GetComponent<PersistentData>();
-        }
-
-        sensInput.text = settings.mouseSens.ToString();
-        sensSlider.value = settings.mouseSens;
-        maxSens = 2 * defaultSens;
+        sensInput.text = LevelManager.mouseSens.ToString("F2");
+        sensSlider.value = LevelManager.mouseSens;
+        maxSens = 10;
     }
 
     public void SliderUpdate()
     {
-        int newSensInt = (int)sensSlider.value;
-        sensInput.text = newSensInt.ToString();
-        settings.mouseSens = Mathf.Clamp(newSensInt, 0, maxSens);
+        float newSens = sensSlider.value;
+        sensInput.text = newSens.ToString("F2");
+        LevelManager.mouseSens = Mathf.Clamp(newSens, 1, maxSens);
+        SaveSens();
     }
 
     public void TextUpdate()
     {
         if (sensInput.text != "")
         {
-            int newSensInt = int.Parse(sensInput.text);
-            sensSlider.value = Mathf.Clamp(newSensInt, 0, maxSens);
-            settings.mouseSens = Mathf.Clamp(newSensInt, 0, maxSens);
+            float newSens = Mathf.Clamp(float.Parse(sensInput.text), 1, maxSens);
+            sensInput.text = newSens.ToString("F2");
+            sensSlider.value = newSens;
+            LevelManager.mouseSens = newSens;
+            SaveSens();
         }
         else 
-        { // reset to default
-            sensInput.text = defaultSens.ToString();
+        {   // reset to default
+            sensInput.text = "5.00";
             TextUpdate();
         }
+    }
+
+    void SaveSens()
+    {
+        PlayerPrefs.SetFloat("mouseSens", LevelManager.mouseSens);
     }
 }

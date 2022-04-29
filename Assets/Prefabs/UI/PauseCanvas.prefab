@@ -220,9 +220,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensInput: {fileID: 1336645267499744598}
   sensSlider: {fileID: 1336645267499744593}
-  defaultSens: 5
-  settings: {fileID: 0}
-  dataPrefab: {fileID: 7578813720081790248, guid: ba117b5d975f30044ba3874b77cade0f, type: 3}
 --- !u!1 &1336645267499744596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,14 +1220,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
+  m_ContentType: 3
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 2
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 3
   m_RegexValue: 
   m_GlobalPointSize: 50
   m_CharacterLimit: 0
@@ -2260,10 +2257,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 5003096790122898148}
   m_HandleRect: {fileID: 2343704404009459509}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 200
-  m_WholeNumbers: 1
-  m_Value: 100
+  m_MinValue: 1
+  m_MaxValue: 10
+  m_WholeNumbers: 0
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
