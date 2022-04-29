@@ -15,6 +15,8 @@ public class MapButtonController : MonoBehaviour
 
     void Awake()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         playerLevel = PlayerPrefs.GetInt("playerLevel", 0);
         StartPlayerAtLevel();
         if (playerLevel == selfLocation)
@@ -61,7 +63,6 @@ public class MapButtonController : MonoBehaviour
             StartCoroutine(MoveAlongPath(index - 1, 1, 0));
             yield return new WaitForSeconds(moveTime);
         }
-        confirmModal.SetActive(true);
         confirmModal.GetComponent<LevelSelectConfirm>().UpdateLevel(levelName, sceneName);
     }
 

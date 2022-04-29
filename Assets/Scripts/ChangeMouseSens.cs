@@ -31,9 +31,10 @@ public class ChangeMouseSens : MonoBehaviour
     {
         if (sensInput.text != "")
         {
-            float newSens = float.Parse(sensInput.text);
-            sensSlider.value = Mathf.Clamp(newSens, 1, maxSens);
-            LevelManager.mouseSens = Mathf.Clamp(newSens, 1, maxSens);
+            float newSens = Mathf.Clamp(float.Parse(sensInput.text), 1, maxSens);
+            sensInput.text = newSens.ToString("F2");
+            sensSlider.value = newSens;
+            LevelManager.mouseSens = newSens;
             SaveSens();
         }
         else 
@@ -46,6 +47,5 @@ public class ChangeMouseSens : MonoBehaviour
     void SaveSens()
     {
         PlayerPrefs.SetFloat("mouseSens", LevelManager.mouseSens);
-        PlayerPrefs.Save();
     }
 }
