@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public Slider healthSlider;
+    public Slider yellowHealthSlider;
     public AudioClip playerDeath;
     int currentHealth;
 
@@ -14,7 +15,10 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = startingHealth;
-        healthSlider.value = currentHealth;
+        yellowHealthSlider.value = startingHealth;
+        yellowHealthSlider.maxValue = startingHealth;
+        healthSlider.value = startingHealth;
+        healthSlider.maxValue = startingHealth;
     }
 
     // Update is called once per frame
@@ -34,12 +38,25 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth -= damageAmount;
             healthSlider.value = currentHealth;
+            StartCoroutine(LerpYellowHealth());
         }
 
         if (currentHealth <= 0)
         {
             PlayerDies();
         }
+    }
+
+    IEnumerator LerpYellowHealth()
+    {
+        yield return new WaitForSeconds(2f);
+        float t = 1;
+        while (yellowHealthSlider.value > currentHealth)
+        {
+            yellowHealthSlider.value = Mathf.MoveTowards(yellowHealthSlider.value, currentHealth, t);
+            yield return null;
+        }
+        yield return null;
     }
 
     void PlayerDies()

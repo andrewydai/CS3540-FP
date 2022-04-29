@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool isFrozen;
     public float gravity = 9.81f;
     public float jumpHeight = 5f;
     public float moveSpeed = 10f;
@@ -32,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        isFrozen = false;
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -90,6 +93,13 @@ public class PlayerController : MonoBehaviour
 
     void NormalMoving()
     {
+        if(isFrozen)
+        {
+            moveDirection.y -= gravity * Time.deltaTime;
+            _controller.Move(moveDirection * Time.deltaTime);
+            return;
+        }
+
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
@@ -151,6 +161,11 @@ public class PlayerController : MonoBehaviour
 
     void MouseRotations()
     {
+        if(isFrozen)
+        {
+            return;
+        }
+
         turn.x += Input.GetAxis("Mouse X") * settings.mouseSens;
         turn.y += Input.GetAxis("Mouse Y") * settings.mouseSens;
         turn.y = Mathf.Clamp(turn.y, pitchMin, pitchMax);

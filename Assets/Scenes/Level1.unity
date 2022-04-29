@@ -1707,6 +1707,10 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 229652007}
+    - target: {fileID: 7553790174834817883, guid: d007cc6a7cc6f834d914c21a1fb16384, type: 3}
+      propertyPath: yellowHealthSlider
+      value: 
+      objectReference: {fileID: 1503117341}
     - target: {fileID: 8563419278933142280, guid: d007cc6a7cc6f834d914c21a1fb16384, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5457,6 +5461,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7629990335799758888, guid: 862f6f92713754345a7565ce2c5a5fb6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7629990335799758888, guid: 862f6f92713754345a7565ce2c5a5fb6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8298611326862193409, guid: 862f6f92713754345a7565ce2c5a5fb6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5476,6 +5488,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9048734028271348292, guid: 862f6f92713754345a7565ce2c5a5fb6, type: 3}
   m_PrefabInstance: {fileID: 1503117339}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1503117341 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8724978106213862913, guid: 862f6f92713754345a7565ce2c5a5fb6, type: 3}
+  m_PrefabInstance: {fileID: 1503117339}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1545562848
 Mesh:
   m_ObjectHideFlags: 0
