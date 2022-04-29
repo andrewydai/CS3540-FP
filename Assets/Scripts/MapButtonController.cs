@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MapButtonController : MonoBehaviour
 {
     public Slider[] paths;
     public int selfLocation;
     public float moveTime = 1f;
+
+    private GameObject confirmModal;
     
     private PersistentData data;
 
     void Start()
     {
         data = PersistentData.Instance;
+        confirmModal = GameObject.FindGameObjectWithTag("ConfirmModal");
+        confirmModal.SetActive(false);
     }
 
     public void MovePlayer()
@@ -32,6 +37,8 @@ public class MapButtonController : MonoBehaviour
         {
             StartCoroutine(RightToLeft());
         }
+        confirmModal.SetActive(true);
+        confirmModal.GetComponentInChildren<TMP_Text>().text = $"Do you want to load {gameObject.name}?"; 
     }
 
     IEnumerator LeftToRight()
