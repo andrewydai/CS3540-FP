@@ -38,12 +38,7 @@ public class MapButtonController : MonoBehaviour
     {
         for (int index = data.playerLocation; index < selfLocation; index++)
         {
-            Slider nextPath = null;
-            if (index < paths.Length - 1)
-            {
-                nextPath = paths[index + 1];
-            }
-            StartCoroutine(MoveAlongPath(paths[index], nextPath, 0, 1));
+            StartCoroutine(MoveAlongPath(index, 0, 1));
             yield return new WaitForSeconds(moveTime);
         }
         data.playerLocation = selfLocation;
@@ -54,19 +49,25 @@ public class MapButtonController : MonoBehaviour
     {
         for (int index = data.playerLocation; index > selfLocation; index--)
         {
-            Slider nextPath = null;
-            if (index > 1)
-            {
-                nextPath = paths[index - 2];
-            }
-            StartCoroutine(MoveAlongPath(paths[index - 1], nextPath, 1, 0));
+            StartCoroutine(MoveAlongPath(index - 1, 1, 0));
             yield return new WaitForSeconds(moveTime);
         }
         data.playerLocation = selfLocation;
     }
 
-    IEnumerator MoveAlongPath(Slider path, Slider nextPath, int start, int end)
+    IEnumerator MoveAlongPath(int pathIndex, int start, int end)
     {
+        Slider path = paths[pathIndex];
+        // show current path and hide paths around it
+        path.handleRect.gameObject.SetActive(true);
+        if (pathIndex > 0)
+        {
+            paths[pathIndex - 1].handleRect.gameObject.SetActive(false);
+        }
+        if (pathIndex < paths.Length - 1)
+        {
+            paths[pathIndex + 1].handleRect.gameObject.SetActive(false);
+        }
         float passedTime = 0f;
         while (passedTime < moveTime)
         {
@@ -74,11 +75,6 @@ public class MapButtonController : MonoBehaviour
             float lerpTime = passedTime / moveTime;
             path.value = Mathf.Lerp(start, end, lerpTime);
             yield return null;
-        }
-        if (nextPath)
-        {
-            path.handleRect.gameObject.SetActive(false);
-            nextPath.handleRect.gameObject.SetActive(true);
         }
     }
 }
