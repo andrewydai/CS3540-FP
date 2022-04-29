@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossBehaviorChild : MonoBehaviour
+public class PlatoBossBehaviorChild : MonoBehaviour
 {
     public int smashDamageAmount;
-    BossBehavior parentScript;
+    PlatoBossBehavior parentScript;
     Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        parentScript = GetComponentInParent<BossBehavior>();
+        parentScript = GetComponentInParent<PlatoBossBehavior>();
     }
 
     void LoadBread()
