@@ -8,25 +8,22 @@ public class ChangeMouseSens : MonoBehaviour
 {
     public TMP_InputField sensInput;
     public Slider sensSlider;
-    public float defaultSens = 5f;
 
-    private float mouseSens;
     private float maxSens;
 
 
     void Awake()
     {
-        mouseSens = PlayerPrefs.GetFloat("mouseSens", defaultSens);
-        sensInput.text = mouseSens.ToString("F2");
-        sensSlider.value = mouseSens;
-        maxSens = 2 * defaultSens;
+        sensInput.text = LevelManager.mouseSens.ToString("F2");
+        sensSlider.value = LevelManager.mouseSens;
+        maxSens = 10;
     }
 
     public void SliderUpdate()
     {
         float newSens = sensSlider.value;
         sensInput.text = newSens.ToString("F2");
-        mouseSens = Mathf.Clamp(newSens, 0, maxSens);
+        LevelManager.mouseSens = Mathf.Clamp(newSens, 1, maxSens);
         SaveSens();
     }
 
@@ -35,21 +32,20 @@ public class ChangeMouseSens : MonoBehaviour
         if (sensInput.text != "")
         {
             float newSens = float.Parse(sensInput.text);
-            sensSlider.value = Mathf.Clamp(newSens, 0, maxSens);
-            mouseSens = Mathf.Clamp(newSens, 0, maxSens);
+            sensSlider.value = Mathf.Clamp(newSens, 1, maxSens);
+            LevelManager.mouseSens = Mathf.Clamp(newSens, 1, maxSens);
             SaveSens();
         }
         else 
         {   // reset to default
-            sensInput.text = defaultSens.ToString();
+            sensInput.text = "5.00";
             TextUpdate();
         }
     }
 
     void SaveSens()
     {
-        PlayerPrefs.SetFloat("mouseSens", mouseSens);
+        PlayerPrefs.SetFloat("mouseSens", LevelManager.mouseSens);
         PlayerPrefs.Save();
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateMouseSens();
     }
 }

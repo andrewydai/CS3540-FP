@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
     int strafeLeft;
     int strafeRight;
 
-    private float mouseSens;
-    
     void Awake()
     {
         Cursor.visible = false;
@@ -42,7 +40,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         InitAnimStates();
-        UpdateMouseSens();
     }
 
     // Update is called once per frame
@@ -141,16 +138,11 @@ public class PlayerController : MonoBehaviour
 
     void MouseRotations()
     {
-        turn.x += Input.GetAxis("Mouse X") * mouseSens;
-        turn.y += Input.GetAxis("Mouse Y") * mouseSens;
+        turn.x += Input.GetAxis("Mouse X") * LevelManager.mouseSens;
+        turn.y += Input.GetAxis("Mouse Y") * LevelManager.mouseSens;
         turn.y = Mathf.Clamp(turn.y, pitchMin, pitchMax);
 
         transform.localRotation = Quaternion.Euler(0, turn.x, 0);
         cameraMount.transform.localRotation = Quaternion.Euler(-turn.y, 0, 0);
-    }
-
-    public void UpdateMouseSens()
-    {
-        mouseSens = PlayerPrefs.GetFloat("mouseSens", 5f);
     }
 }

@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-
 public class MapButtonController : MonoBehaviour
 {
     public Slider[] paths;
     public int selfLocation;
     public float moveTime = 1f;
+    public GameObject confirmModal;
+    public string sceneName;
+    public string levelName;
 
-    private GameObject confirmModal;
     private int playerLevel;
 
     void Awake()
@@ -46,6 +46,8 @@ public class MapButtonController : MonoBehaviour
             StartCoroutine(MoveAlongPath(index, 0, 1));
             yield return new WaitForSeconds(moveTime);
         }
+        confirmModal.SetActive(true);
+        confirmModal.GetComponent<LevelSelectConfirm>().UpdateLevel(levelName, sceneName);
     }
 
     // copy of function above with reverse direction, too lazy to generalize sorry
@@ -56,6 +58,8 @@ public class MapButtonController : MonoBehaviour
             StartCoroutine(MoveAlongPath(index - 1, 1, 0));
             yield return new WaitForSeconds(moveTime);
         }
+        confirmModal.SetActive(true);
+        confirmModal.GetComponent<LevelSelectConfirm>().UpdateLevel(levelName, sceneName);
     }
 
     IEnumerator MoveAlongPath(int pathIndex, int start, int end)

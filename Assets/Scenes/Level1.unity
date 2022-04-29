@@ -4226,6 +4226,18 @@ PrefabInstance:
       propertyPath: m_MaxValue
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1336645267499744593, guid: e793b646dc75d5c4dbfc29e94e94e2b2, type: 3}
+      propertyPath: m_MinValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336645267499744593, guid: e793b646dc75d5c4dbfc29e94e94e2b2, type: 3}
+      propertyPath: m_WholeNumbers
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336645267499744593, guid: e793b646dc75d5c4dbfc29e94e94e2b2, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1336645267499744595, guid: e793b646dc75d5c4dbfc29e94e94e2b2, type: 3}
       propertyPath: dataPrefab
       value: 
@@ -6337,7 +6349,6 @@ MonoBehaviour:
   currentLevel: Level1
   nextLevel: Level1_boss
   statusText: {fileID: 2106733310}
-  dataPrefab: {fileID: 7578813720081790248, guid: ba117b5d975f30044ba3874b77cade0f, type: 3}
 --- !u!82 &1748995209
 AudioSource:
   m_ObjectHideFlags: 0

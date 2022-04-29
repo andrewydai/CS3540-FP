@@ -12,12 +12,14 @@ public class LevelManager : MonoBehaviour
     public string winMessage;
     public string loseMessage;
     public string currentLevel;
-    public string nextLevel;
     public Text statusText;
-    
+
+    public static float mouseSens;
+
     // Start is called before the first frame update
     void Awake()
     {
+        mouseSens = Mathf.Clamp(PlayerPrefs.GetFloat("mouseSens", 5), 2, 10);
         GetComponent<AudioSource>().Play();
         isLevelOver = false;
     }
@@ -49,10 +51,7 @@ public class LevelManager : MonoBehaviour
 
     private void LoadNextLevel()
     {
-        if(nextLevel != "")
-        {
-            SceneManager.LoadScene(nextLevel);
-        }
+        SceneManager.LoadScene("Map");
     }
 
     public void LoadLevel(string levelName)
