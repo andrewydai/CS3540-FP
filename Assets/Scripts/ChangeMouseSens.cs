@@ -12,7 +12,7 @@ public class ChangeMouseSens : MonoBehaviour
     private float maxSens;
 
 
-    void Awake()
+    void Start()
     {
         sensInput.text = LevelManager.mouseSens.ToString("F2");
         sensSlider.value = LevelManager.mouseSens;
