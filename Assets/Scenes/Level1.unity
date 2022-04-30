@@ -1757,7 +1757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9051303801679180209, guid: d007cc6a7cc6f834d914c21a1fb16384, type: 3}
       propertyPath: pitchMin
-      value: -15
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 9051303801679180209, guid: d007cc6a7cc6f834d914c21a1fb16384, type: 3}
       propertyPath: dataPrefab

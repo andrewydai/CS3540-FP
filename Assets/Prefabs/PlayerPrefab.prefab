@@ -2235,13 +2235,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f75b3bc6315ca40863e57afbcae96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFrozen: 0
   gravity: 30
   jumpHeight: 4
   moveSpeed: 6
   airControl: 6
-  pitchMin: -30
+  pitchMin: -70
   pitchMax: 30
-  dataPrefab: {fileID: 0}
 --- !u!143 &9051303801679180208
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2288,6 +2288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   healthSlider: {fileID: 0}
+  yellowHealthSlider: {fileID: 0}
   playerDeath: {fileID: 8300000, guid: a7c9a80a7dbb2574d9acec81a7ba6bd8, type: 3}
 --- !u!114 &642382458
 MonoBehaviour:
@@ -2335,6 +2336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c3406272364ee4e81a2d07ea375dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  freezeTime: 0
+  goldMat: {fileID: 0}
 --- !u!1001 &8168923943098869381
 PrefabInstance:
   m_ObjectHideFlags: 0

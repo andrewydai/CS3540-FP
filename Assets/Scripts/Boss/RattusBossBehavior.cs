@@ -57,7 +57,7 @@ public class RattusBossBehavior : MonoBehaviour
         {
             agent.isStopped = false;
         }
-        if (Vector3.Distance(player.transform.position, transform.position) < attackRange)
+        if (canReachPlayer && Vector3.Distance(player.transform.position, transform.position) < attackRange)
         {
             if(attackTimer < 0)
             {

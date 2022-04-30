@@ -16324,7 +16324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9051303801679180209, guid: d007cc6a7cc6f834d914c21a1fb16384, type: 3}
       propertyPath: pitchMin
-      value: -15
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 9051303801679180209, guid: d007cc6a7cc6f834d914c21a1fb16384, type: 3}
       propertyPath: dataPrefab
@@ -43093,12 +43093,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winSFX: {fileID: 8300000, guid: 2295f4a3b23b35e42888d9d8e1a9416f, type: 3}
   loseSFX: {fileID: 8300000, guid: f402176c252c6dc4ebbe9955fecd8afe, type: 3}
-  winMessage: Cafe Cleaned!
+  winMessage: Rattus Cleaned
   loseMessage: You Lose!
   currentLevel: Level2_boss
-  nextLevel: 
   statusText: {fileID: 2198345130697171317}
-  dataPrefab: {fileID: 7578813720081790248, guid: ba117b5d975f30044ba3874b77cade0f, type: 3}
 --- !u!82 &1748995209
 AudioSource:
   m_ObjectHideFlags: 0
